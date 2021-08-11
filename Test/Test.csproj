@@ -54,7 +54,7 @@
     <Compile Include="InputForm.Designer.cs">
       <DependentUpon>InputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

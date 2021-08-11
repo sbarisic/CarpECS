@@ -56,6 +56,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes.cs" />
+    <Compile Include="EditableData\EditableData.cs">
+      <SubType>Misc</SubType>
+    </Compile>
+    <Compile Include="EditableData\EngineData.cs">
+      <SubType>Engine</SubType>
+    </Compile>
+    <Compile Include="EditableData\FuelMap.cs">
+      <SubType>Maps</SubType>
+    </Compile>
+    <Compile Include="EditableData\IgnitionAdvanceMap.cs">
+      <SubType>Maps</SubType>
+    </Compile>
+    <Compile Include="EditableData\LoadLimiter.cs">
+      <SubType>Maps</SubType>
+    </Compile>
     <Compile Include="MapEdit.cs">
       <SubType>Form</SubType>
     </Compile>

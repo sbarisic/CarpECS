@@ -28,8 +28,8 @@ namespace MapEdit {
 
 			Datas = new EditableData[] {
 				EData,
-				new InjectionMap(EData),
-				new AdvanceMap(EData),
+				new FuelMap(EData),
+				new IgnitionAdvanceMap(EData),
 				new LoadLimiter(EData),
 			};
 			SetEditable(Datas);
