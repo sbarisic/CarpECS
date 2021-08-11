@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes.cs" />
+    <Compile Include="EditableData\AxisParameter.cs" />
     <Compile Include="EditableData\EditableData.cs">
       <SubType>Misc</SubType>
     </Compile>
@@ -71,6 +72,7 @@
     <Compile Include="EditableData\LoadLimiter.cs">
       <SubType>Maps</SubType>
     </Compile>
+    <Compile Include="GridSelection.cs" />
     <Compile Include="MapEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,7 +81,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealTime\EngineMonitor.cs" />
     <Compile Include="RotatingLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TransparentPanel.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

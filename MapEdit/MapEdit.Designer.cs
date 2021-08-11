@@ -23,6 +23,7 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Test");
 			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Misc", new System.Windows.Forms.TreeNode[] {
             treeNode3});
@@ -31,10 +32,11 @@
 			this.PropertyPanel = new System.Windows.Forms.Panel();
 			this.Properties = new System.Windows.Forms.PropertyGrid();
 			this.GridPanel = new System.Windows.Forms.Panel();
-			this.XAxisLabel = new System.Windows.Forms.Label();
-			this.Grid = new unvell.ReoGrid.ReoGridControl();
-			this.YAxisLabel = new RotatingLabel.RotatingLabel();
 			this.ValueLabel = new System.Windows.Forms.Label();
+			this.XAxisLabel = new System.Windows.Forms.Label();
+			this.YAxisLabel = new RotatingLabel.RotatingLabel();
+			this.Grid = new unvell.ReoGrid.ReoGridControl();
+			this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -58,7 +60,7 @@
 			this.splitContainer1.Panel2.Controls.Add(this.PropertyPanel);
 			this.splitContainer1.Panel2.Controls.Add(this.GridPanel);
 			this.splitContainer1.Size = new System.Drawing.Size(1526, 786);
-			this.splitContainer1.SplitterDistance = 450;
+			this.splitContainer1.SplitterDistance = 253;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// Tree
@@ -73,7 +75,7 @@
 			treeNode4.Text = "Misc";
 			this.Tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-			this.Tree.Size = new System.Drawing.Size(450, 786);
+			this.Tree.Size = new System.Drawing.Size(253, 786);
 			this.Tree.TabIndex = 0;
 			// 
 			// PropertyPanel
@@ -106,6 +108,15 @@
 			this.GridPanel.Size = new System.Drawing.Size(553, 780);
 			this.GridPanel.TabIndex = 1;
 			// 
+			// ValueLabel
+			// 
+			this.ValueLabel.AutoSize = true;
+			this.ValueLabel.Location = new System.Drawing.Point(18, 3);
+			this.ValueLabel.Name = "ValueLabel";
+			this.ValueLabel.Size = new System.Drawing.Size(34, 13);
+			this.ValueLabel.TabIndex = 3;
+			this.ValueLabel.Text = "Value";
+			// 
 			// XAxisLabel
 			// 
 			this.XAxisLabel.AutoSize = true;
@@ -114,6 +125,18 @@
 			this.XAxisLabel.Size = new System.Drawing.Size(36, 13);
 			this.XAxisLabel.TabIndex = 1;
 			this.XAxisLabel.Text = "X Axis";
+			// 
+			// YAxisLabel
+			// 
+			this.YAxisLabel.AutoSize = true;
+			this.YAxisLabel.BackColor = System.Drawing.SystemColors.Control;
+			this.YAxisLabel.Location = new System.Drawing.Point(3, 73);
+			this.YAxisLabel.MinimumSize = new System.Drawing.Size(12, 250);
+			this.YAxisLabel.Name = "YAxisLabel";
+			this.YAxisLabel.NewText = "Y Axis";
+			this.YAxisLabel.RotateAngle = -90;
+			this.YAxisLabel.Size = new System.Drawing.Size(12, 250);
+			this.YAxisLabel.TabIndex = 2;
 			// 
 			// Grid
 			// 
@@ -135,27 +158,6 @@
 			this.Grid.Size = new System.Drawing.Size(529, 737);
 			this.Grid.TabIndex = 0;
 			this.Grid.Text = "reoGridControl1";
-			// 
-			// YAxisLabel
-			// 
-			this.YAxisLabel.AutoSize = true;
-			this.YAxisLabel.BackColor = System.Drawing.SystemColors.Control;
-			this.YAxisLabel.Location = new System.Drawing.Point(3, 73);
-			this.YAxisLabel.MinimumSize = new System.Drawing.Size(12, 250);
-			this.YAxisLabel.Name = "YAxisLabel";
-			this.YAxisLabel.NewText = "Y Axis";
-			this.YAxisLabel.RotateAngle = -90;
-			this.YAxisLabel.Size = new System.Drawing.Size(12, 250);
-			this.YAxisLabel.TabIndex = 2;
-			// 
-			// ValueLabel
-			// 
-			this.ValueLabel.AutoSize = true;
-			this.ValueLabel.Location = new System.Drawing.Point(18, 3);
-			this.ValueLabel.Name = "ValueLabel";
-			this.ValueLabel.Size = new System.Drawing.Size(34, 13);
-			this.ValueLabel.TabIndex = 3;
-			this.ValueLabel.Text = "Value";
 			// 
 			// MapEdit
 			// 
@@ -188,5 +190,6 @@
 		private System.Windows.Forms.Label XAxisLabel;
 		private RotatingLabel.RotatingLabel YAxisLabel;
 		private System.Windows.Forms.Label ValueLabel;
+		private System.Windows.Forms.Timer UpdateTimer;
 	}
 }

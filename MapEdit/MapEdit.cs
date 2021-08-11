@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapEdit.RealTime;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,64 +14,16 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.Graphics;
 
 namespace MapEdit {
-	class GridSelection {
-		public Worksheet Sheet;
-		public Cell A, B, C, D;
-
-		public int X1 {
-			get {
-				return A.Column;
-			}
-		}
-
-		public int X2 {
-			get {
-				return B.Column;
-			}
-		}
-
-		public int Y1 {
-			get {
-				return A.Row;
-			}
-		}
-
-		public int Y2 {
-			get {
-				return C.Row;
-			}
-		}
-
-		public int Width {
-			get {
-				return X2 - X1 + 1;
-			}
-		}
-
-		public int Height {
-			get {
-				return Y2 - Y1 + 1;
-			}
-		}
-
-		public GridSelection() {
-		}
-
-		public GridSelection(Worksheet Sheet) {
-			this.Sheet = Sheet;
-			A = Sheet.Cells[0, 0];
-			B = Sheet.Cells[0, Sheet.ColumnCount - 1];
-			C = Sheet.Cells[Sheet.RowCount - 1, 0];
-			D = Sheet.Cells[Sheet.RowCount - 1, Sheet.ColumnCount - 1];
-		}
-	}
-
 	public partial class MapEdit : Form {
 		EditableData CurrentEdited;
 		ContextMenu CtxMenu;
 		GridSelection Selection;
 
+		//TransparentPanel Pnl;
+
 		public MapEdit() {
+			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+
 			InitializeComponent();
 		}
 
@@ -83,6 +36,33 @@ namespace MapEdit {
 
 			Edit(null);
 			Tree.AfterSelect += TreeSelected;
+
+			UpdateTimer.Tick += UpdateTimer_Tick;
+			UpdateTimer.Start();
+
+			/*// Create panel
+			Pnl = new TransparentPanel();
+			// splitContainer1.Panel2.Controls.Add(Pnl);
+			Grid.Controls.Add(Pnl);
+
+			Pnl.DoPaint = Pnl_Paint;
+			Pnl.Size = Grid.Size;
+			Pnl.BringToFront();
+			Pnl.Enabled = false;
+
+			Grid.Resize += (s, ee) => {
+				Pnl.Size = Grid.Size;
+			};*/
+		}
+
+		/*private void Pnl_Paint(Graphics Gfx) {
+			
+
+			Gfx.FillEllipse(Brushes.Red, 100, 100, 10, 10);
+		}*/
+
+		private void UpdateTimer_Tick(object sender, EventArgs e) {
+			//Pnl.Invalidate();
 		}
 
 		private void OnMouseClick(object S, MouseEventArgs E) {
@@ -117,7 +97,7 @@ namespace MapEdit {
 
 			for (int Y = Sel.Y1; Y <= Sel.Y2; Y++)
 				for (int X = Sel.X1; X <= Sel.X2; X++) {
-					double Data = 0;
+					double Data;
 
 					if (Sel.Width == 1)
 						Data = Utils.Lerp((double)A.Data, (double)D.Data, Sel.Y1, Sel.Y2, Y);
@@ -189,17 +169,18 @@ namespace MapEdit {
 			if (!Data.DataEnabled)
 				return;
 
-			XAxisLabel.Text = Data.XName;
-			YAxisLabel.NewText = Data.YName;
-			ValueLabel.Text = Data.ValueName;
 
 			switch (Data.EditMode) {
 				case EditMode.Grid: {
+						XAxisLabel.Text = Data.XParam.AxisName;
+						YAxisLabel.NewText = Data.YParam.AxisName;
+						ValueLabel.Text = Data.ValueName;
+
 						GridPanel.Visible = true;
 						Grid.Worksheets.Clear();
 
 						if (Data.Worksheet == null) {
-							Worksheet WSheet = Grid.Worksheets.Create(string.Format("{0} / {1}", Data.XName, Data.YName));
+							Worksheet WSheet = Grid.Worksheets.Create(string.Format("{0} / {1}", Data.XParam.AxisName, Data.YParam.AxisName));
 							Data.Worksheet = WSheet;
 
 							WSheet.RowCount = 1;

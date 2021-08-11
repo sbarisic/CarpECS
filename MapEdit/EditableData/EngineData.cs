@@ -11,7 +11,7 @@ using unvell.ReoGrid.Graphics;
 namespace MapEdit {
 	[DesignerCategory("Engine"), DisplayName("Engine data")]
 	public class EngineData : EditableData {
-		public EngineData() : base(EditMode.Property) {
+		public EngineData() : base(EditMode.Property, null, null) {
 		}
 
 		[Description("Number of cylinders"), Category("Basic")]
@@ -27,10 +27,10 @@ namespace MapEdit {
 		public bool EnableRevLimit { get; set; } = true;
 
 		[Description("RPM above which the rev limiter activates [RPM]"), Category("Rev limiter")]
-		public int RevLimit { get; set; } = 11000;
+		public int RevLimit { get; set; } = 7000;
 
 		[Description("RPM below which the rev limiter deactivates [RPM]"), Category("Rev limiter")]
-		public int RevLimitStop { get; set; } = 10950;
+		public int RevLimitStop { get; set; } = 6950;
 
 		// Lambda
 

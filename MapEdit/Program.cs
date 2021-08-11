@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapEdit.RealTime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace MapEdit {
 		static MapEdit EditForm;
 		static EditableData[] Datas;
 
+		public static IMonitor ECUMonitor;
+
 		static void Main(string[] args) {
 			Initialized = false;
 
@@ -24,7 +27,10 @@ namespace MapEdit {
 			while (!Initialized)
 				Thread.Sleep(10);
 
+			ECUMonitor = new EngineMonitor();
+
 			EngineData EData = new EngineData();
+			AxisParameters.Init(EData, ECUMonitor);
 
 			Datas = new EditableData[] {
 				EData,
@@ -32,6 +38,7 @@ namespace MapEdit {
 				new IgnitionAdvanceMap(EData),
 				new LoadLimiter(EData),
 			};
+
 			SetEditable(Datas);
 		}
 
@@ -43,6 +50,7 @@ namespace MapEdit {
 
 		static void RunForms() {
 			Application.EnableVisualStyles();
+
 			EditForm = new MapEdit();
 			Initialized = true;
 
