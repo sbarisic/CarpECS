@@ -1,2 +1,3 @@
 # CarpECS
-Arduino based engine control system
+
+Engine control unit and mapping R&D
