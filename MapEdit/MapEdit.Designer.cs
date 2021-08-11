@@ -35,7 +35,7 @@
 			this.ValueLabel = new System.Windows.Forms.Label();
 			this.XAxisLabel = new System.Windows.Forms.Label();
 			this.YAxisLabel = new RotatingLabel.RotatingLabel();
-			this.Grid = new unvell.ReoGrid.ReoGridControl();
+			this.Grid = new ReoGridControlHAAAX();
 			this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -183,7 +183,7 @@
 
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.PropertyGrid Properties;
-		private unvell.ReoGrid.ReoGridControl Grid;
+		private ReoGridControlHAAAX Grid;
 		private System.Windows.Forms.TreeView Tree;
 		private System.Windows.Forms.Panel PropertyPanel;
 		private System.Windows.Forms.Panel GridPanel;

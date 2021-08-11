@@ -82,10 +82,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTime\EngineMonitor.cs" />
-    <Compile Include="RotatingLabel.cs">
+    <Compile Include="ReoGridControlHAAAX.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TransparentPanel.cs">
+    <Compile Include="RotatingLabel.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

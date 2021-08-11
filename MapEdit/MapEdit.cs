@@ -1,4 +1,5 @@
 ﻿using MapEdit.RealTime;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using unvell.ReoGrid;
 using unvell.ReoGrid.Graphics;
 
@@ -18,8 +20,6 @@ namespace MapEdit {
 		EditableData CurrentEdited;
 		ContextMenu CtxMenu;
 		GridSelection Selection;
-
-		//TransparentPanel Pnl;
 
 		public MapEdit() {
 			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -39,30 +39,11 @@ namespace MapEdit {
 
 			UpdateTimer.Tick += UpdateTimer_Tick;
 			UpdateTimer.Start();
-
-			/*// Create panel
-			Pnl = new TransparentPanel();
-			// splitContainer1.Panel2.Controls.Add(Pnl);
-			Grid.Controls.Add(Pnl);
-
-			Pnl.DoPaint = Pnl_Paint;
-			Pnl.Size = Grid.Size;
-			Pnl.BringToFront();
-			Pnl.Enabled = false;
-
-			Grid.Resize += (s, ee) => {
-				Pnl.Size = Grid.Size;
-			};*/
 		}
 
-		/*private void Pnl_Paint(Graphics Gfx) {
-			
-
-			Gfx.FillEllipse(Brushes.Red, 100, 100, 10, 10);
-		}*/
-
 		private void UpdateTimer_Tick(object sender, EventArgs e) {
-			//Pnl.Invalidate();
+			Grid.UpdateTracer();
+			Grid.Invalidate();
 		}
 
 		private void OnMouseClick(object S, MouseEventArgs E) {
@@ -169,6 +150,7 @@ namespace MapEdit {
 			if (!Data.DataEnabled)
 				return;
 
+			Grid.CurrentData = Data;
 
 			switch (Data.EditMode) {
 				case EditMode.Grid: {

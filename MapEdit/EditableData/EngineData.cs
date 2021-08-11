@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using unvell.ReoGrid;
 using unvell.ReoGrid.Graphics;
 
@@ -15,11 +16,16 @@ namespace MapEdit {
 		}
 
 		[Description("Number of cylinders"), Category("Basic")]
-		public int Cylinders { get; set; } = 1;
+		public int Cylinders { get; set; } = 4;
 
 		[Display(Order = 1)]
 		[Description("Engine displacement [cm^3]"), Category("Basic")]
-		public int Displacement { get; set; } = 200;
+		public int Displacement { get; set; } = 1364;
+
+		[Description("Firing order"), Category("Basic")]
+		public string FiringOrder {
+			get; set;
+		} = "1 3 4 2";
 
 		// Rev limiter
 
