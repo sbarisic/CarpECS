@@ -23,10 +23,9 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Test");
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Misc", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Test");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Misc", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.Tree = new System.Windows.Forms.TreeView();
 			this.PropertyPanel = new System.Windows.Forms.Panel();
@@ -36,7 +35,6 @@
 			this.XAxisLabel = new System.Windows.Forms.Label();
 			this.YAxisLabel = new RotatingLabel.RotatingLabel();
 			this.Grid = new ReoGridControlHAAAX();
-			this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -69,12 +67,12 @@
 			this.Tree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.Tree.Location = new System.Drawing.Point(0, 0);
 			this.Tree.Name = "Tree";
-			treeNode3.Name = "Test";
-			treeNode3.Text = "Test";
-			treeNode4.Name = "Misc";
-			treeNode4.Text = "Misc";
+			treeNode1.Name = "Test";
+			treeNode1.Text = "Test";
+			treeNode2.Name = "Misc";
+			treeNode2.Text = "Misc";
 			this.Tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode2});
 			this.Tree.Size = new System.Drawing.Size(253, 786);
 			this.Tree.TabIndex = 0;
 			// 
@@ -190,6 +188,5 @@
 		private System.Windows.Forms.Label XAxisLabel;
 		private RotatingLabel.RotatingLabel YAxisLabel;
 		private System.Windows.Forms.Label ValueLabel;
-		private System.Windows.Forms.Timer UpdateTimer;
 	}
 }

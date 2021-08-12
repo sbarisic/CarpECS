@@ -34,6 +34,8 @@ namespace MapEdit {
 
 			Datas = new EditableData[] {
 				EData,
+				new VolumetricEfficiencyMap(EData),
+				new MassAirFlowMap(EData),
 				new FuelMap(EData),
 				new IgnitionAdvanceMap(EData),
 				new LoadLimiter(EData),

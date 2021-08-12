@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,23 +15,40 @@ namespace MapEdit.RealTime {
 
 		double GetCurrentGear();
 
+		double GetCurrentMAP();
+
+		double GetCurrentMAF();
 	}
 
 	public class EngineMonitor : IMonitor {
+		Stopwatch SWatch;
+
+		public EngineMonitor() {
+			SWatch = Stopwatch.StartNew();
+		}
+
 		public bool MonitorAvailable() {
 			return true;
 		}
 
 		public double GetRPM() {
-			return 2000;
+			return ((Math.Sin(SWatch.Elapsed.TotalSeconds / 2) + 1) / 2) * 4000 + 500;
 		}
 
 		public double GetEngineLoad() {
-			return 10;
+			return ((Math.Sin(SWatch.Elapsed.TotalSeconds / 3) + 1) / 2) * 60 + 5;
 		}
 
 		public double GetCurrentGear() {
 			return 0;
+		}
+
+		public double GetCurrentMAP() {
+			return ((Math.Sin(SWatch.Elapsed.TotalSeconds / 1.5) + 1) / 2) * 2 + 0.3;
+		}
+
+		public double GetCurrentMAF() {
+			return ((Math.Sin(SWatch.Elapsed.TotalSeconds / 1.5) + 1) / 2) * 140;
 		}
 	}
 }

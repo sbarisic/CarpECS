@@ -63,6 +63,12 @@
     <Compile Include="EditableData\EngineData.cs">
       <SubType>Engine</SubType>
     </Compile>
+    <Compile Include="EditableData\MassAirFlowMap.cs">
+      <SubType>Maps</SubType>
+    </Compile>
+    <Compile Include="EditableData\VolumetricEfficiencyMap.cs">
+      <SubType>Maps</SubType>
+    </Compile>
     <Compile Include="EditableData\FuelMap.cs">
       <SubType>Maps</SubType>
     </Compile>

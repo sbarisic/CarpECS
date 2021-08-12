@@ -63,6 +63,12 @@ namespace MapEdit {
 		[Description("Maximum allowed AFR [A/F]"), Category("Fuel injector")]
 		public float MaxAFR { get; set; } = 16.0f;
 
+		[Description("Minimum allowed VE [A/F]"), Category("Volumetric efficiency")]
+		public float MinVE { get; set; } = 0;
+
+		[Description("Maximum allowed VE [%]"), Category("Volumetric efficiency")]
+		public float MaxVE { get; set; } = 150;
+
 		/*[Description("Calculated injector pulse range [ms]"), Category("Fuel injector")]
 		public float PulseRange {
 			get {

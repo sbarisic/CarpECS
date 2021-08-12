@@ -23,7 +23,6 @@ namespace MapEdit {
 
 		public MapEdit() {
 			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-
 			InitializeComponent();
 		}
 
@@ -36,14 +35,6 @@ namespace MapEdit {
 
 			Edit(null);
 			Tree.AfterSelect += TreeSelected;
-
-			UpdateTimer.Tick += UpdateTimer_Tick;
-			UpdateTimer.Start();
-		}
-
-		private void UpdateTimer_Tick(object sender, EventArgs e) {
-			Grid.UpdateTracer();
-			Grid.Invalidate();
 		}
 
 		private void OnMouseClick(object S, MouseEventArgs E) {
