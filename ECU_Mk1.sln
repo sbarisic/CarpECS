@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ECU_Mk1", "ECU_Mk1\ECU_Mk1.vcxproj", "{93D1952A-C50F-4B4E-987E-850502B0D526}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEdit", "MapEdit\MapEdit.csproj", "{C2D57876-1D71-40E9-94C3-6BDCD5375B63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{1E09552C-1921-4083-AD65-9EE6CA6101D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,14 @@ Global
 		{C2D57876-1D71-40E9-94C3-6BDCD5375B63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2D57876-1D71-40E9-94C3-6BDCD5375B63}.Release|x64.ActiveCfg = Release|Any CPU
 		{C2D57876-1D71-40E9-94C3-6BDCD5375B63}.Release|x64.Build.0 = Release|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Debug|x64.Build.0 = Debug|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
