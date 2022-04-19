@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEdit", "MapEdit\MapEdit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{1E09552C-1921-4083-AD65-9EE6CA6101D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCalculator", "TurboCalculator\TurboCalculator.csproj", "{87046866-831A-4F52-AD0E-6A80683D43F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,14 @@ Global
 		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Release|x64.ActiveCfg = Release|Any CPU
 		{1E09552C-1921-4083-AD65-9EE6CA6101D2}.Release|x64.Build.0 = Release|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Debug|x64.Build.0 = Debug|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Release|x64.ActiveCfg = Release|Any CPU
+		{87046866-831A-4F52-AD0E-6A80683D43F8}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
