@@ -25,6 +25,16 @@ namespace MapEdit {
 			return A + ((B - A) * X);
 		}
 
+		public static float Lerp(float A, float B, float X) {
+			if (X <= 0)
+				return A;
+
+			if (X >= 1)
+				return B;
+
+			return A + ((B - A) * X);
+		}
+
 		public static double Lerp(double A, double B, double X1, double X2, double X) {
 			double DX = (X - X1) / (X2 - X1);
 			return Lerp(A, B, DX);

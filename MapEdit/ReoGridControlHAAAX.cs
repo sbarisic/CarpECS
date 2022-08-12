@@ -53,12 +53,12 @@ namespace MapEdit {
 
 		private void UpdateTimer_Tick(object sender, EventArgs e) {
 			if (EnableTracer && Program.ECUMonitor.MonitorAvailable()) {
-				UpdateTracer();
+				//UpdateTracer();
 				Invalidate();
 			}
 		}
 
-		public void UpdateTracer() {
+		/*public void UpdateTracer() {
 			if (CurrentData == null)
 				return;
 
@@ -77,7 +77,7 @@ namespace MapEdit {
 		void DrawTracer(Graphics Gfx, float X, float Y) {
 			float Size = 10;
 			Gfx.FillEllipse(Brushes.Red, X - Size / 2, Y - Size / 2, Size, Size);
-		}
+		}*/
 
 		float CalcX(int Column) {
 			float X = CurrentWorksheet.RowHeaderWidth / 2;
@@ -101,12 +101,12 @@ namespace MapEdit {
 			return Y;
 		}
 
-		void DrawTracer(Graphics Gfx, int Column, int Row) {
+		/*void DrawTracer(Graphics Gfx, int Column, int Row) {
 			if (Column < 0 || Row < 0 || Column >= CurrentWorksheet.ColumnCount || Row >= CurrentWorksheet.RowCount)
 				return;
 
 			DrawTracer(Gfx, CalcX(Column), CalcY(Row));
-		}
+		}*/
 
 		void DrawTracerLine(Graphics Gfx, int StartColumn, int StartRow, int EndColumn, int EndRow, Color Clr) {
 			if (!PosValid(StartColumn, StartRow) || !PosValid(EndColumn, EndRow))
@@ -130,7 +130,7 @@ namespace MapEdit {
 					DrawTracerLine(e.Graphics, TracerHistoryX[i - 1], TracerHistoryY[i - 1], TracerHistoryX[i], TracerHistoryY[i], Colors[i]);
 				}
 
-				DrawTracer(e.Graphics, TracerX, TracerY);
+				//DrawTracer(e.Graphics, TracerX, TracerY);
 			}
 		}
 	}

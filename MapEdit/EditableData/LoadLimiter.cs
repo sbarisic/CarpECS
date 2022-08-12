@@ -9,7 +9,7 @@ using unvell.ReoGrid;
 using unvell.ReoGrid.Graphics;
 
 namespace MapEdit {
-	[DesignerCategory("Maps"), DisplayName("Load limiter by gear map")]
+	/*[DesignerCategory("Maps"), DisplayName("Load limiter by gear map")]
 	public class LoadLimiter : EditableData {
 		public LoadLimiter(EngineData EngineData) : base(EditMode.Grid, AxisParameters.RPM, AxisParameters.GearboxGear) {
 			//XName = "Engine speed [RPM]";
@@ -30,5 +30,5 @@ namespace MapEdit {
 			if (Value is double Num)
 				C.Style.BackColor = Utils.Lerp(SolidColor.Red, SolidColor.Green, SolidColor.Blue, 0, 200, (float)Num, Center: 100);
 		}
-	}
+	}*/
 }

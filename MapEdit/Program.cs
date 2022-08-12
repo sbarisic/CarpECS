@@ -32,13 +32,17 @@ namespace MapEdit {
 			EngineData EData = new EngineData();
 			AxisParameters.Init(EData, ECUMonitor);
 
+
+			LookupTableAxis TestX = new LookupTableAxis("RPM", new float[] { 1000, 2000, 3000, 400 });
+			LookupTableAxis TestY = new LookupTableAxis("MAF", new float[] { 10, 14, 20 });
+			LookupTable2D Test = new LookupTable2D(TestX, TestY, new float[] { 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2 });
+
+
 			Datas = new EditableData[] {
 				EData,
-				new VolumetricEfficiencyMap(EData),
-				new MassAirFlowMap(EData),
-				new FuelMap(EData),
-				new IgnitionAdvanceMap(EData),
-				new LoadLimiter(EData),
+				//new LoadLimiter(EData),
+
+				new EditableData(EditMode.Grid, Test)
 			};
 
 			SetEditable(Datas);

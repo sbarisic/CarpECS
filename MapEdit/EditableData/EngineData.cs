@@ -12,7 +12,7 @@ using unvell.ReoGrid.Graphics;
 namespace MapEdit {
 	[DesignerCategory("Engine"), DisplayName("Engine data")]
 	public class EngineData : EditableData {
-		public EngineData() : base(EditMode.Property, null, null) {
+		public EngineData() : base(EditMode.Property) {
 		}
 
 		[Description("Number of cylinders"), Category("Basic")]

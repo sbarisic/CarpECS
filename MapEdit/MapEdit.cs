@@ -145,15 +145,15 @@ namespace MapEdit {
 
 			switch (Data.EditMode) {
 				case EditMode.Grid: {
-						XAxisLabel.Text = Data.XParam.AxisName;
-						YAxisLabel.NewText = Data.YParam.AxisName;
+						XAxisLabel.Text = Data.XAxisName;
+						YAxisLabel.NewText = Data.YAxisName;
 						ValueLabel.Text = Data.ValueName;
 
 						GridPanel.Visible = true;
 						Grid.Worksheets.Clear();
 
 						if (Data.Worksheet == null) {
-							Worksheet WSheet = Grid.Worksheets.Create(string.Format("{0} / {1}", Data.XParam.AxisName, Data.YParam.AxisName));
+							Worksheet WSheet = Grid.Worksheets.Create(string.Format("{0} / {1}", Data.XAxisName, Data.YAxisName));
 							Data.Worksheet = WSheet;
 
 							WSheet.RowCount = 1;
