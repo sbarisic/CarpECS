@@ -61,12 +61,16 @@
     <Compile Include="EditableData\EditableData.cs">
       <SubType>Misc</SubType>
     </Compile>
+    <Compile Include="EditableData\LookupTableSettings.cs">
+      <SubType>Properties</SubType>
+    </Compile>
     <Compile Include="EditableData\EngineData.cs">
       <SubType>Engine</SubType>
     </Compile>
     <Compile Include="EditableData\LookupTable.cs" />
     <Compile Include="EditableData\LoadLimiter.cs" />
     <Compile Include="GridSelection.cs" />
+    <Compile Include="ImageIndex.cs" />
     <Compile Include="MapEdit.cs">
       <SubType>Form</SubType>
     </Compile>

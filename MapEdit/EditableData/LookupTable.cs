@@ -22,7 +22,7 @@ namespace MapEdit {
 
 		public LookupTableAxis(string AxisName, float[] Data) {
 			this.AxisName = AxisName;
-			this.Data = Data.Reverse().ToArray();
+			this.Data = Data.ToArray();
 		}
 
 		public void GetAxisIndex(float Value, out int Index1, out int Index2, out float Interp) {

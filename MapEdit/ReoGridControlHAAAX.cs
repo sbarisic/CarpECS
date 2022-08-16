@@ -7,8 +7,9 @@ using System.Windows.Forms;
 using System.Drawing;
 using unvell.ReoGrid;
 using unvell.ReoGrid.Graphics;
+using MapEdit;
 
-namespace MapEdit {
+namespace MapEditNamespace {
 	public class ReoGridControlHAAAX : ReoGridControl {
 		public bool EnableTracer = false;
 		public EditableData CurrentData;

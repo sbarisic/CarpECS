@@ -249,7 +249,7 @@ namespace TurboCalculator {
 				float Val = (float)Math.Round(Efficiency_YAxis[i], 0);
 				float LbsMin = (int)Math.Round(Val * 0.132277, 0);
 
-				AxisLabel(true, Val, String.Format("{1}", Val, LbsMin));
+				AxisLabel(true, Val, String.Format("{0}", Val, LbsMin));
 			}
 
 
