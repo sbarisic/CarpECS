@@ -56,5 +56,9 @@ namespace MapEdit {
 			C = Sheet.Cells[Sheet.RowCount - 1, 0];
 			D = Sheet.Cells[Sheet.RowCount - 1, Sheet.ColumnCount - 1];
 		}
+
+		public RangePosition ToRange() {
+			return new RangePosition(Y1, X1, Height, Width);
+		}
 	}
 }

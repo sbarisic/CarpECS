@@ -18,14 +18,14 @@ namespace MapEdit {
 			}
 		}
 
-		public float[] Data;
+		public double[] Data;
 
-		public LookupTableAxis(string AxisName, float[] Data) {
+		public LookupTableAxis(string AxisName, double[] Data) {
 			this.AxisName = AxisName;
 			this.Data = Data.ToArray();
 		}
 
-		public void GetAxisIndex(float Value, out int Index1, out int Index2, out float Interp) {
+		public void GetAxisIndex(double Value, out int Index1, out int Index2, out double Interp) {
 			Interp = 0;
 
 			if (Value < Data[0]) {
@@ -35,16 +35,16 @@ namespace MapEdit {
 				Index1 = AxisLength - 1;
 				Index2 = AxisLength - 1;
 			} else {
-				float Prev = 0;
-				float Cur = 0;
+				double Prev = 0;
+				double Cur = 0;
 
 				for (int i = 1; i < AxisLength; i++) {
 					Prev = Data[i - 1];
 					Cur = Data[i];
 
 					if (Value >= Prev && Value <= Cur) {
-						float MinVal = Value - Prev;
-						float Range = Cur - Prev;
+						double MinVal = Value - Prev;
+						double Range = Cur - Prev;
 
 						Interp = MinVal / Range;
 						Index1 = i - 1;
@@ -59,20 +59,21 @@ namespace MapEdit {
 	}
 
 	public class LookupTable : ILookupTable {
-		public float[] Data;
+		public string Name;
+		public double[] Data;
 	}
 
 	public class LookupTable2D : LookupTable {
 		public LookupTableAxis Axis_X;
 		public LookupTableAxis Axis_Y;
 
-		public LookupTable2D(LookupTableAxis AxisX, LookupTableAxis AxisY, float[] Data) {
+		public LookupTable2D(LookupTableAxis AxisX, LookupTableAxis AxisY, double[] Data) {
 			Axis_X = AxisX;
 			Axis_Y = AxisY;
 			this.Data = Data;
 		}
 
-		public float GetDataRaw(int X, int Y) {
+		public double GetDataRaw(int X, int Y) {
 			if (X < 0)
 				X = 0;
 
@@ -89,18 +90,18 @@ namespace MapEdit {
 			return Data[Idx];
 		}
 
-		public void SetData(int X, int Y, float Val) {
+		public void SetData(int X, int Y, double Val) {
 			Data[X + Axis_X.AxisLength * Y] = Val;
 		}
 
-		public float IndexData(float Axis_X_Val, float Axis_Y_Val) {
-			Axis_X.GetAxisIndex(Axis_X_Val, out int Idx_X_1, out int Idx_X_2, out float Interp_X);
-			Axis_Y.GetAxisIndex(Axis_Y_Val, out int Idx_Y_1, out int Idx_Y_2, out float Interp_Y);
+		public double IndexData(double Axis_X_Val, double Axis_Y_Val) {
+			Axis_X.GetAxisIndex(Axis_X_Val, out int Idx_X_1, out int Idx_X_2, out double Interp_X);
+			Axis_Y.GetAxisIndex(Axis_Y_Val, out int Idx_Y_1, out int Idx_Y_2, out double Interp_Y);
 
-			float TopLeft = GetDataRaw(Idx_X_1, Idx_Y_1);
-			float TopRight = GetDataRaw(Idx_X_2, Idx_Y_1);
-			float BottomLeft = GetDataRaw(Idx_X_1, Idx_Y_2);
-			float BottomRight = GetDataRaw(Idx_X_2, Idx_Y_2);
+			double TopLeft = GetDataRaw(Idx_X_1, Idx_Y_1);
+			double TopRight = GetDataRaw(Idx_X_2, Idx_Y_1);
+			double BottomLeft = GetDataRaw(Idx_X_1, Idx_Y_2);
+			double BottomRight = GetDataRaw(Idx_X_2, Idx_Y_2);
 
 			return (float)Utils.Bilinear(TopLeft, TopRight, BottomLeft, BottomRight, Interp_X, Interp_Y);
 		}
