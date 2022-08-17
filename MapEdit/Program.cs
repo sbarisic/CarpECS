@@ -33,14 +33,16 @@ namespace MapEdit {
 			//AxisParameters.Init(EData, ECUMonitor);
 
 
-			LookupTableAxis TestX = new LookupTableAxis("RPM", new double[] { 1000, 1100, 2000, 3000, 4000 });
+			LookupTableAxis TestX = new LookupTableAxis("RPM", new double[] { 1000, 2000, 3000, 4000, 5000 });
 
 			LookupTableAxis TestY = new LookupTableAxis("MAF",
 				new double[] {
 					10,
 					14,
 					16,
-					20
+					20,
+					25,
+					30
 				}
 			);
 
@@ -49,7 +51,9 @@ namespace MapEdit {
 					0, 1, 2, 3, 4,
 					0, 1, 2, 3, 4,
 					0, 1, 2, 3, 4,
-					18, 7, 8, 9, 10
+					18, 7, 8, 9, 10,
+					0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0
 				}
 			);
 

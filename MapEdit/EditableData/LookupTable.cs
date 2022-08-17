@@ -31,9 +31,11 @@ namespace MapEdit {
 			if (Value < Data[0]) {
 				Index1 = 0;
 				Index2 = 0;
+				return;
 			} else if (Value > Data[AxisLength - 1]) {
 				Index1 = AxisLength - 1;
 				Index2 = AxisLength - 1;
+				return;
 			} else {
 				double Prev = 0;
 				double Cur = 0;
@@ -94,9 +96,21 @@ namespace MapEdit {
 			Data[X + Axis_X.AxisLength * Y] = Val;
 		}
 
-		public double IndexData(double Axis_X_Val, double Axis_Y_Val) {
+		public double IndexData(double Axis_X_Val, double Axis_Y_Val, out int ClosestX, out int ClosestY, out float OffsetX, out float OffsetY) {
 			Axis_X.GetAxisIndex(Axis_X_Val, out int Idx_X_1, out int Idx_X_2, out double Interp_X);
 			Axis_Y.GetAxisIndex(Axis_Y_Val, out int Idx_Y_1, out int Idx_Y_2, out double Interp_Y);
+
+			/*ClosestX = Interp_X < 0.5 ? Idx_X_1 : Idx_X_2;
+			ClosestY = Interp_Y < 0.5 ? Idx_Y_1 : Idx_Y_2;
+
+			OffsetX = (float)((Interp_X * 2.0) - 1.0);
+			OffsetY = (float)((Interp_Y * 2.0) - 1.0);*/
+
+			ClosestX = Idx_X_1;
+			ClosestY = Idx_Y_1;
+
+			OffsetX = (float)Interp_X;
+			OffsetY = (float)Interp_Y;
 
 			double TopLeft = GetDataRaw(Idx_X_1, Idx_Y_1);
 			double TopRight = GetDataRaw(Idx_X_2, Idx_Y_1);

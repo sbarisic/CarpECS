@@ -49,9 +49,11 @@
 			this.btnAdd = new System.Windows.Forms.ToolStripButton();
 			this.btnMul = new System.Windows.Forms.ToolStripButton();
 			this.XAxisLabel = new System.Windows.Forms.Label();
+			this.iconList = new System.Windows.Forms.ImageList(this.components);
+			this.formTimer = new System.Windows.Forms.Timer(this.components);
 			this.YAxisLabel = new RotatingLabel.RotatingLabel();
 			this.Grid = new MapEditNamespace.ReoGridControlHAAAX();
-			this.iconList = new System.Windows.Forms.ImageList(this.components);
+			this.btnTracer = new System.Windows.Forms.ToolStripButton();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -172,6 +174,7 @@
 			// 
 			this.toolStripTable.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnTools,
+            this.btnTracer,
             this.btnRefreshColors,
             this.toolStripSeparator1,
             this.textBox,
@@ -238,7 +241,6 @@
 			// 
 			// textBox
 			// 
-			this.textBox.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.textBox.Name = "textBox";
 			this.textBox.Size = new System.Drawing.Size(100, 25);
 			this.textBox.Text = "0";
@@ -284,6 +286,22 @@
 			this.XAxisLabel.TabIndex = 1;
 			this.XAxisLabel.Text = "X Axis";
 			// 
+			// iconList
+			// 
+			this.iconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconList.ImageStream")));
+			this.iconList.TransparentColor = System.Drawing.Color.Transparent;
+			this.iconList.Images.SetKeyName(0, "table.png");
+			this.iconList.Images.SetKeyName(1, "table_gear.png");
+			this.iconList.Images.SetKeyName(2, "script.png");
+			this.iconList.Images.SetKeyName(3, "application.png");
+			this.iconList.Images.SetKeyName(4, "cog.png");
+			this.iconList.Images.SetKeyName(5, "pencil.png");
+			this.iconList.Images.SetKeyName(6, "page_edit.png");
+			// 
+			// formTimer
+			// 
+			this.formTimer.Interval = 50;
+			// 
 			// YAxisLabel
 			// 
 			this.YAxisLabel.AutoSize = true;
@@ -318,17 +336,14 @@
 			this.Grid.TabIndex = 0;
 			this.Grid.Text = "reoGridControl1";
 			// 
-			// iconList
+			// btnTracer
 			// 
-			this.iconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconList.ImageStream")));
-			this.iconList.TransparentColor = System.Drawing.Color.Transparent;
-			this.iconList.Images.SetKeyName(0, "table.png");
-			this.iconList.Images.SetKeyName(1, "table_gear.png");
-			this.iconList.Images.SetKeyName(2, "script.png");
-			this.iconList.Images.SetKeyName(3, "application.png");
-			this.iconList.Images.SetKeyName(4, "cog.png");
-			this.iconList.Images.SetKeyName(5, "pencil.png");
-			this.iconList.Images.SetKeyName(6, "page_edit.png");
+			this.btnTracer.CheckOnClick = true;
+			this.btnTracer.Image = ((System.Drawing.Image)(resources.GetObject("btnTracer.Image")));
+			this.btnTracer.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btnTracer.Name = "btnTracer";
+			this.btnTracer.Size = new System.Drawing.Size(58, 22);
+			this.btnTracer.Text = "Tracer";
 			// 
 			// MapEdit
 			// 
@@ -381,5 +396,7 @@
 		private System.Windows.Forms.ToolStripButton btnAdd;
 		private System.Windows.Forms.ToolStripButton btnMul;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.Timer formTimer;
+		private System.Windows.Forms.ToolStripButton btnTracer;
 	}
 }

@@ -25,7 +25,7 @@ namespace MapEdit {
 		public double TopRight;
 		public double BottomRight;*/
 
-		LookupTable2D Table;
+		public LookupTable2D Table;
 		public ImageIndex Icon;
 
 		[Browsable(false)]

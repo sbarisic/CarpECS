@@ -18,6 +18,8 @@ namespace MapEdit.RealTime {
 		double GetCurrentMAP();
 
 		double GetCurrentMAF();
+
+		double GetSampleData(int Min, int Max, double Freq);
 	}
 
 	public class EngineMonitor : IMonitor {
@@ -32,7 +34,9 @@ namespace MapEdit.RealTime {
 		}
 
 		public double GetRPM() {
-			return ((Math.Sin(SWatch.Elapsed.TotalSeconds / 2) + 1) / 2) * 4000 + 500;
+			return ((Math.Sin(SWatch.Elapsed.TotalSeconds / 2) + 1) / 2) * 2500 + 1500;
+
+			// return 3150;
 		}
 
 		public double GetEngineLoad() {
@@ -49,6 +53,13 @@ namespace MapEdit.RealTime {
 
 		public double GetCurrentMAF() {
 			return ((Math.Sin(SWatch.Elapsed.TotalSeconds / 1.5) + 1) / 2) * 140;
+		}
+
+		public double GetSampleData(int Min, int Max, double Freq) {
+			double Time = (Math.Sin(SWatch.Elapsed.TotalSeconds * Freq) + 1) / 2;
+
+			//return Time * (Max - Min);
+			return Time * (Max - Min) + Min;
 		}
 	}
 }

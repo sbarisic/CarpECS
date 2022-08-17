@@ -1,4 +1,5 @@
 ﻿using MapEdit.RealTime;
+using MapEdit.ReoGridCtls;
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,9 @@ using System.Windows.Forms;
 
 using unvell.ReoGrid;
 using unvell.ReoGrid.Graphics;
+using unvell.ReoGrid.Drawing.Shapes;
+
+using ReoPoint = unvell.ReoGrid.Graphics.Point;
 
 namespace MapEdit {
 	public delegate void OnCellAction(int X, int Y, ref Cell C);
@@ -24,6 +28,9 @@ namespace MapEdit {
 
 		ContextMenu CtxMenu;
 		GridSelection Selection;
+
+		RoundedRectangleShape Floater;
+		TailShape FloaterTail;
 
 		public MapEdit() {
 			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -40,6 +47,105 @@ namespace MapEdit {
 			Edit(null);
 			Tree.AfterSelect += TreeSelected;
 			Tree.ImageList = iconList;
+
+			btnTracer.CheckedChanged += BtnTracer_CheckedChanged;
+
+			formTimer.Tick += FormTimer_Tick;
+			formTimer.Start();
+		}
+
+		private void BtnTracer_CheckedChanged(object sender, EventArgs e) {
+			Worksheet WSheet = Grid.CurrentWorksheet;
+
+			if (WSheet == null)
+				return;
+
+			if (btnTracer.Checked) {
+				SpawnFloater(WSheet);
+			} else {
+				Floater = null;
+				FloaterTail = null;
+				WSheet.FloatingObjects.Clear();
+			}
+		}
+
+		private void FormTimer_Tick(object sender, EventArgs e) {
+			if (!GridPanel.Visible)
+				return;
+
+			if (!btnTracer.Checked)
+				return;
+
+			Worksheet WSheet = Grid.CurrentWorksheet;
+
+			if (WSheet == null)
+				return;
+
+			SpawnFloater(WSheet);
+
+			int RPM = (int)Program.ECUMonitor.GetRPM();
+			double YData = Program.ECUMonitor.GetSampleData(11, 28, 1.55);
+
+			Console.WriteLine(YData);
+
+			ReoPoint Pt = CalculatePhysicalPos(RPM, YData);
+			FloaterTail.PushPoint(Pt);
+
+			Pt.X -= 4;
+			Pt.Y -= 5;
+			Floater.Location = Pt;
+			Floater.Invalidate();
+		}
+
+		ReoPoint CalculatePhysicalPos(double XVal, double YVal) {
+			CurrentEdited.Table.IndexData(XVal, YVal, out int Col, out int Row, out float OffX, out float OffY);
+
+			GetCellPos(Col, Row, out float X, out float Y, out float W, out float H);
+
+			if (OffX > 0) {
+				GetCellPos(Col + 1, Row, out float X2, out float Y2, out float W2, out float H2);
+				X = Utils.Lerp(X, X2, OffX);
+			}
+
+			if (OffY > 0) {
+				GetCellPos(Col, Row + 1, out float X2, out float Y2, out float W2, out float H2);
+				Y = Utils.Lerp(Y, Y2, OffY);
+			}
+
+			return new ReoPoint(X + W / 2, Y + H / 2);
+		}
+
+		bool GetCellPos(int Col, int Row, out float X, out float Y, out float W, out float H) {
+			Worksheet WSheet = Grid.CurrentWorksheet;
+
+			if (Col < 0 || Col >= WSheet.ColumnCount || Row < 0 || Row >= WSheet.RowCount) {
+				X = Y = W = H = 0;
+				return false;
+			}
+
+			ReoPoint Pt = WSheet.GetCellPhysicsPosition(Row, Col);
+
+			X = Pt.X;
+			Y = Pt.Y;
+			H = WSheet.GetRowHeight(Row);
+			W = WSheet.GetColumnWidth(Col);
+			return true;
+		}
+
+		void SpawnFloater(Worksheet WSheet) {
+			if (Floater == null) {
+				Floater = new RoundedRectangleShape();
+				Floater.RoundRate = 1;
+				Floater.Size = new unvell.ReoGrid.Graphics.Size(10, 10);
+				Floater.Style.FillColor = SolidColor.Red;
+
+				WSheet.FloatingObjects.Add(Floater);
+			}
+
+			if (FloaterTail == null) {
+				FloaterTail = new TailShape();
+				WSheet.FloatingObjects.Add(FloaterTail);
+			}
 		}
 
 		bool CalculateSelection() {
@@ -71,6 +177,12 @@ namespace MapEdit {
 					CtxMenu.MenuItems.Add(new MenuItem("Interpolate", (SS, EE) => Interpolate(Selection)));
 					CtxMenu.MenuItems.Add(new MenuItem("Diff by Row", (SS, EE) => diffByRowToolStripMenuItem_Click(SS, EE)));
 					CtxMenu.MenuItems.Add(new MenuItem("Diff by Col", (SS, EE) => diffByColumnToolStripMenuItem_Click(SS, EE)));
+
+					CtxMenu.MenuItems.Add("-");
+
+					CtxMenu.MenuItems.Add(new MenuItem("Set", (SS, EE) => btnSet_Click(SS, EE)));
+					CtxMenu.MenuItems.Add(new MenuItem("Add", (SS, EE) => btnAdd_Click(SS, EE)));
+					CtxMenu.MenuItems.Add(new MenuItem("Mul", (SS, EE) => btnMul_Click(SS, EE)));
 				}
 
 				CtxMenu.Show(Grid, Grid.PointToClient(MousePosition));
@@ -216,6 +328,9 @@ namespace MapEdit {
 						if (Data.Worksheet == null) {
 							Worksheet WSheet = Grid.Worksheets.Create(string.Format("{0} / {1}", Data.XAxisName, Data.YAxisName));
 							Data.Worksheet = WSheet;
+
+							WSheet.DisableSettings(WorksheetSettings.Edit_AllowAdjustColumnWidth | WorksheetSettings.Edit_AllowAdjustRowHeight);
+							WSheet.DisableSettings(WorksheetSettings.Edit_DragSelectionToMoveCells);
 
 							WSheet.RowCount = 1;
 							WSheet.ColumnCount = 1;
