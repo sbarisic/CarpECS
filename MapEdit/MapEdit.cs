@@ -329,6 +329,8 @@ namespace MapEdit {
 							Worksheet WSheet = Grid.Worksheets.Create(string.Format("{0} / {1}", Data.XAxisName, Data.YAxisName));
 							Data.Worksheet = WSheet;
 
+							
+
 							WSheet.DisableSettings(WorksheetSettings.Edit_AllowAdjustColumnWidth | WorksheetSettings.Edit_AllowAdjustRowHeight);
 							WSheet.DisableSettings(WorksheetSettings.Edit_DragSelectionToMoveCells);
 

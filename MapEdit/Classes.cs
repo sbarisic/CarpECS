@@ -128,8 +128,7 @@ namespace MapEdit {
 			return Arr;
 		}
 
-		public static EditableData ParseTableFromClipboard() {
-			string RawText = Clipboard.GetText().Trim();
+		public static EditableData ParseTableFromText(string RawText) {
 			string[] Lines = RawText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
 			string[][] Table = Lines.Select(L => L.Split(new[] { '\t', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToArray()).ToArray();
 
@@ -156,10 +155,15 @@ namespace MapEdit {
 			LookupTableAxis TableYAxis = new LookupTableAxis(YAxisUnit, ParseStringArrayToDouble(YAxisLabels));
 			LookupTable2D LookupTable = new LookupTable2D(TableXAxis, TableYAxis, RawTableDataFloat);
 
-			EditableData EditData= new EditableData(EditMode.Grid, LookupTable, Unit);
+			EditableData EditData = new EditableData(EditMode.Grid, LookupTable, Unit);
 			EditData.DataProperties = new LookupTableSettings(LookupTable);
 
 			return EditData;
+		}
+
+		public static EditableData ParseTableFromClipboard() {
+			string RawText = Clipboard.GetText().Trim();
+			return ParseTableFromText(RawText);
 		}
 	}
 }

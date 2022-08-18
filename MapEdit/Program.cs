@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MapEdit {
 	class Program {
@@ -32,9 +33,21 @@ namespace MapEdit {
 			//EngineData EData = new EngineData();
 			//AxisParameters.Init(EData, ECUMonitor);
 
+			string[] TableFiles = Directory.GetFiles("data/tables", "*.txt");
+			List<EditableData> DataList = new List<EditableData>();
 
-			LookupTableAxis TestX = new LookupTableAxis("RPM", new double[] { 1000, 2000, 3000, 4000, 5000 });
+			for (int i = 0; i < TableFiles.Length; i++) {
+				string TableName = Path.GetFileNameWithoutExtension(TableFiles[i]);
+				string RawText = File.ReadAllText(TableFiles[i].Trim());
 
+				EditableData EData = Utils.ParseTableFromText(RawText);
+				EData.Name = TableName;
+
+				DataList.Add(EData);
+			}
+
+
+			/*LookupTableAxis TestX = new LookupTableAxis("RPM", new double[] { 1000, 2000, 3000, 4000, 5000 });
 			LookupTableAxis TestY = new LookupTableAxis("MAF",
 				new double[] {
 					10,
@@ -45,7 +58,6 @@ namespace MapEdit {
 					30
 				}
 			);
-
 			LookupTable2D Test = new LookupTable2D(TestX, TestY,
 				new double[] {
 					0, 1, 2, 3, 4,
@@ -66,7 +78,9 @@ namespace MapEdit {
 				//new LoadLimiter(EData),
 
 				TestData
-			};
+			};*/
+
+			Datas = DataList.ToArray();
 
 			Thread.Sleep(100);
 			SetEditable(Datas);

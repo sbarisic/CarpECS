@@ -118,7 +118,7 @@ namespace MapEdit {
 			Sheet.ColumnCount = Count;
 			Sheet.SetColumnsWidth(0, Count, 45);
 
-			for (int i = 0; i < Count; i++)
+			for (int i = 0; i < Count; i++) 
 				Sheet.ColumnHeaders[i].Text = Table.Axis_X.Data[i].ToString();
 		}
 
