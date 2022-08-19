@@ -343,6 +343,7 @@ namespace MapEdit {
 
 						Grid.CurrentWorksheet = Data.Worksheet;
 						ColorSheet(Data.Worksheet);
+						StylizeSheet(Data.Worksheet);
 						break;
 					}
 
@@ -355,6 +356,17 @@ namespace MapEdit {
 				default:
 					throw new Exception("Invalid edit mode " + Data.EditMode);
 			}
+		}
+
+		void StylizeSheet(Worksheet Sheet) {
+			RangePosition Rng = new RangePosition(0, 0, Sheet.RowCount, Sheet.ColumnCount);
+
+			WorksheetRangeStyle Style = Sheet.GetRangeStyles(Rng);
+			Style.Flag = PlainStyleFlag.FontSize | PlainStyleFlag.FontName;
+			Style.FontName = "Consolas";
+			Style.FontSize = 9;
+
+			Sheet.SetRangeStyles(Rng, Style);
 		}
 
 		private void diffByRowToolStripMenuItem_Click(object sender, EventArgs e) {

@@ -68,7 +68,6 @@
 			// 
 			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -81,9 +80,9 @@
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.PropertyPanel);
 			this.splitContainer1.Panel2.Controls.Add(this.GridPanel);
-			this.splitContainer1.Size = new System.Drawing.Size(2035, 967);
-			this.splitContainer1.SplitterDistance = 400;
-			this.splitContainer1.SplitterWidth = 5;
+			this.splitContainer1.Size = new System.Drawing.Size(1473, 890);
+			this.splitContainer1.SplitterDistance = 300;
+			this.splitContainer1.SplitterWidth = 6;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// toolStripTree
@@ -94,7 +93,7 @@
             this.btnDeleteTable});
 			this.toolStripTree.Location = new System.Drawing.Point(0, 0);
 			this.toolStripTree.Name = "toolStripTree";
-			this.toolStripTree.Size = new System.Drawing.Size(400, 25);
+			this.toolStripTree.Size = new System.Drawing.Size(300, 25);
 			this.toolStripTree.TabIndex = 1;
 			this.toolStripTree.Text = "toolStrip2";
 			// 
@@ -131,8 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.Tree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.Tree.Location = new System.Drawing.Point(4, 34);
-			this.Tree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Tree.Location = new System.Drawing.Point(3, 28);
 			this.Tree.Name = "Tree";
 			treeNode1.Name = "Test";
 			treeNode1.Text = "Test";
@@ -140,16 +138,15 @@
 			treeNode2.Text = "Misc";
 			this.Tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode2});
-			this.Tree.Size = new System.Drawing.Size(391, 925);
+			this.Tree.Size = new System.Drawing.Size(294, 856);
 			this.Tree.TabIndex = 0;
 			// 
 			// PropertyPanel
 			// 
 			this.PropertyPanel.Controls.Add(this.Properties);
-			this.PropertyPanel.Location = new System.Drawing.Point(749, 4);
-			this.PropertyPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.PropertyPanel.Location = new System.Drawing.Point(549, 15);
 			this.PropertyPanel.Name = "PropertyPanel";
-			this.PropertyPanel.Size = new System.Drawing.Size(676, 960);
+			this.PropertyPanel.Size = new System.Drawing.Size(483, 486);
 			this.PropertyPanel.TabIndex = 2;
 			// 
 			// Properties
@@ -157,10 +154,9 @@
 			this.Properties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.Properties.Location = new System.Drawing.Point(4, 4);
-			this.Properties.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Properties.Location = new System.Drawing.Point(3, 3);
 			this.Properties.Name = "Properties";
-			this.Properties.Size = new System.Drawing.Size(668, 953);
+			this.Properties.Size = new System.Drawing.Size(477, 480);
 			this.Properties.TabIndex = 0;
 			// 
 			// GridPanel
@@ -170,10 +166,9 @@
 			this.GridPanel.Controls.Add(this.XAxisLabel);
 			this.GridPanel.Controls.Add(this.YAxisLabel);
 			this.GridPanel.Controls.Add(this.Grid);
-			this.GridPanel.Location = new System.Drawing.Point(4, 4);
-			this.GridPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.GridPanel.Location = new System.Drawing.Point(17, 15);
 			this.GridPanel.Name = "GridPanel";
-			this.GridPanel.Size = new System.Drawing.Size(737, 960);
+			this.GridPanel.Size = new System.Drawing.Size(506, 489);
 			this.GridPanel.TabIndex = 1;
 			// 
 			// toolStripTable
@@ -189,7 +184,7 @@
             this.btnMul});
 			this.toolStripTable.Location = new System.Drawing.Point(0, 0);
 			this.toolStripTable.Name = "toolStripTable";
-			this.toolStripTable.Size = new System.Drawing.Size(737, 25);
+			this.toolStripTable.Size = new System.Drawing.Size(506, 25);
 			this.toolStripTable.TabIndex = 3;
 			this.toolStripTable.Text = "toolStrip1";
 			// 
@@ -258,7 +253,7 @@
 			// 
 			this.textBox.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.textBox.Name = "textBox";
-			this.textBox.Size = new System.Drawing.Size(132, 25);
+			this.textBox.Size = new System.Drawing.Size(100, 25);
 			this.textBox.Text = "0";
 			this.textBox.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
@@ -296,8 +291,7 @@
 			// 
 			this.XAxisLabel.AutoSize = true;
 			this.XAxisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.XAxisLabel.Location = new System.Drawing.Point(92, 31);
-			this.XAxisLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.XAxisLabel.Location = new System.Drawing.Point(69, 25);
 			this.XAxisLabel.Name = "XAxisLabel";
 			this.XAxisLabel.Size = new System.Drawing.Size(59, 20);
 			this.XAxisLabel.TabIndex = 1;
@@ -308,13 +302,12 @@
 			this.YAxisLabel.AutoSize = true;
 			this.YAxisLabel.BackColor = System.Drawing.SystemColors.Control;
 			this.YAxisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.YAxisLabel.Location = new System.Drawing.Point(4, 127);
-			this.YAxisLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.YAxisLabel.MinimumSize = new System.Drawing.Size(27, 308);
+			this.YAxisLabel.Location = new System.Drawing.Point(3, 103);
+			this.YAxisLabel.MinimumSize = new System.Drawing.Size(20, 250);
 			this.YAxisLabel.Name = "YAxisLabel";
 			this.YAxisLabel.NewText = "Y Axis";
 			this.YAxisLabel.RotateAngle = -90;
-			this.YAxisLabel.Size = new System.Drawing.Size(27, 308);
+			this.YAxisLabel.Size = new System.Drawing.Size(20, 250);
 			this.YAxisLabel.TabIndex = 2;
 			// 
 			// Grid
@@ -326,17 +319,16 @@
 			this.Grid.ColumnHeaderContextMenuStrip = null;
 			this.Grid.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.Grid.LeadHeaderContextMenuStrip = null;
-			this.Grid.Location = new System.Drawing.Point(39, 59);
-			this.Grid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Grid.Location = new System.Drawing.Point(29, 48);
 			this.Grid.Name = "Grid";
 			this.Grid.RowHeaderContextMenuStrip = null;
 			this.Grid.Script = null;
 			this.Grid.SheetTabContextMenuStrip = null;
-			this.Grid.SheetTabNewButtonVisible = true;
-			this.Grid.SheetTabVisible = true;
-			this.Grid.SheetTabWidth = 80;
+			this.Grid.SheetTabNewButtonVisible = false;
+			this.Grid.SheetTabVisible = false;
+			this.Grid.SheetTabWidth = 60;
 			this.Grid.ShowScrollEndSpacing = true;
-			this.Grid.Size = new System.Drawing.Size(695, 897);
+			this.Grid.Size = new System.Drawing.Size(474, 438);
 			this.Grid.TabIndex = 0;
 			this.Grid.Text = "reoGridControl1";
 			// 
@@ -358,11 +350,10 @@
 			// 
 			// MapEdit
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(2035, 967);
+			this.ClientSize = new System.Drawing.Size(1473, 890);
 			this.Controls.Add(this.splitContainer1);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.Name = "MapEdit";
 			this.Text = "MapEdit";
 			this.Load += new System.EventHandler(this.MapEdit_Load);

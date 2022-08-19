@@ -116,10 +116,11 @@ namespace MapEdit {
 			int Count = Table.Axis_X.AxisLength;
 
 			Sheet.ColumnCount = Count;
-			Sheet.SetColumnsWidth(0, Count, 45);
+			Sheet.SetColumnsWidth(0, Count, 42);
 
-			for (int i = 0; i < Count; i++) 
+			for (int i = 0; i < Count; i++) {
 				Sheet.ColumnHeaders[i].Text = Table.Axis_X.Data[i].ToString();
+			}
 		}
 
 		protected void GenerateYAxis(Worksheet Sheet /*, int Count, Func<int, string> GenName*/) {
@@ -128,6 +129,8 @@ namespace MapEdit {
 
 			int Count = Table.Axis_Y.AxisLength;
 			Sheet.RowCount = Count;
+
+			Sheet.SetRowsHeight(0, Count, 20);
 
 			for (int i = 0; i < Count; i++)
 				Sheet.RowHeaders[i].Text = Table.Axis_Y.Data[i].ToString();

@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NodeEditor</name>
+    </assembly>
+    <members>
+        <member name="T:NodeEditor.DynamicNodeContext">
+            <summary>
+            Class used as internal context of each node.
+            </summary>
+        </member>
+        <member name="T:NodeEditor.DynamicNodeContextConverter">
+            <summary>
+            Converter that allows to display node context object e.g. in property grids.
+            </summary>
+        </member>
+        <member name="T:NodeEditor.ExecutionPath">
+            <summary>
+            Class that represents output/input type of execution path.
+            </summary>
+        </member>
+        <member name="T:NodeEditor.FeedbackType">
+            <summary>
+            Feedback types used in INodeContext, to specify kind of feedback
+            </summary>
+        </member>
+        <member name="T:NodeEditor.INodesContext">
+            <summary>
+            Interface that every NodesControl context should implement.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.INodesContext.CurrentProcessingNode">
+            <summary>
+            Property that is set to actual processed node during execution process.
+            </summary>
+        </member>
+        <member name="E:NodeEditor.INodesContext.FeedbackInfo">
+            <summary>
+            Event that can be raised when your application would to return some feedback information
+            to the nodes graph. (Message, Related Node, Feedback Type, Tag - Anything, BreakExecution)
+            </summary>
+        </member>
+        <member name="T:NodeEditor.NodeAttribute">
+            <summary>
+            Attribute resposible for exposing a method to the NodesControl.
+            </summary>
+        </member>
+        <member name="F:NodeEditor.NodeAttribute.Auto">
+            <summary>
+            Const used for width and height if they are not defined by user
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.Menu">
+            <summary>
+            Where should be node menuitem located - don't set if it should be in the main menu level.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.Category">
+            <summary>
+            Optional category for the node.
+            </summary>        
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.IsCallable">
+            <summary>
+            If true, the node is able to be executed during execution process (will have exec input and output socket).
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.Name">
+            <summary>
+            Name of the node that will be displayed in the node caption.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.Description">
+            <summary>
+            Description that should tell more precisely what the node is performing.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.IsExecutionInitiator">
+            <summary>
+            If true the node will be the start point of the execution.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.CustomEditor">
+            <summary>
+            Given type should be subclass of System.Windows.Forms.Control, and represents what will be displayed in the middle of the node.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.XmlExportName">
+            <summary>
+            Name that will be used in the xml export of the graph.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.Width">
+            <summary>
+            Width of single node
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.Height">
+            <summary>
+            Height of single node
+            </summary>
+        </member>
+        <member name="M:NodeEditor.NodeAttribute.#ctor(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Type,System.String,System.Int32,System.Int32)">
+            <summary>
+            Attribute for exposing method as node.
+            </summary>
+            <param name="name">Name of the node that will be displayed in the node caption.</param>
+            <param name="menu">Where should be node menuitem located - don't set if it should be in the main menu level.</param>
+            <param name="category">Optional category for the node.</param>
+            <param name="description">Description that should tell more precisely what the node is performing.</param>
+            <param name="isCallable">If true, the node is able to be executed during execution process (will have exec input and output socket).</param>
+            <param name="isExecutionInitiator">If true the node will be the start point of the execution.</param>
+            <param name="customEditor">Given type should be subclass of System.Windows.Forms.Control, and represents what will be displayed in the middle of the node.</param>
+            <param name="xmlExportName">Name that will be used in the xml export of the graph.</param>
+            <param name="width">Width of single node, or Auto if not determined</param>
+            <param name="height">Height of single node, or Auto if not determined</param>
+        </member>
+        <member name="P:NodeEditor.NodeAttribute.Path">
+            <summary>
+            Full path in the context menu.
+            </summary>
+        </member>
+        <member name="T:NodeEditor.NodesControl">
+            <summary>
+            Main control of Node Editor Winforms
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodesControl.Context">
+            <summary>
+            Context of the editor. You should set here an instance that implements INodesContext interface.
+            In context you should define your nodes (methods decorated by Node attribute).
+            </summary>
+        </member>
+        <member name="E:NodeEditor.NodesControl.OnNodeContextSelected">
+            <summary>
+            Occurs when user selects a node. In the object will be passed node settings for unplugged inputs/outputs.
+            </summary>
+        </member>
+        <member name="E:NodeEditor.NodesControl.OnNodeHint">
+            <summary>
+            Occurs when node would to share its description.
+            </summary>
+        </member>
+        <member name="E:NodeEditor.NodesControl.OnShowLocation">
+            <summary>
+            Indicates which part of control should be actually visible. It is useful when dragging nodes out of autoscroll parent control,
+            to guarantee that moving node/connection is visible to user.
+            </summary>
+        </member>
+        <member name="M:NodeEditor.NodesControl.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:NodeEditor.NodesControl.Execute(NodeEditor.NodeVisual)">
+            <summary>
+            Executes whole node graph (when called parameterless) or given node when specified.
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="M:NodeEditor.NodesControl.Resolve(NodeEditor.NodeVisual)">
+            <summary>
+            Resolves given node, resolving it all dependencies recursively.
+            </summary>
+            <param name="node"></param>
+        </member>
+        <member name="M:NodeEditor.NodesControl.Serialize">
+            <summary>
+            Serializes current node graph to binary data.
+            </summary>        
+        </member>
+        <member name="M:NodeEditor.NodesControl.Deserialize(System.Byte[])">
+            <summary>
+            Restores node graph state from previously serialized binary data.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:NodeEditor.NodesControl.Clear">
+            <summary>
+            Clears node graph state.
+            </summary>
+        </member>
+        <member name="F:NodeEditor.NodesControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:NodeEditor.NodesControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:NodeEditor.NodesControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:NodeEditor.NodeVisual">
+            <summary>
+            Class that represents one instance of node.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeVisual.Name">
+            <summary>
+            Current node name.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeVisual.X">
+            <summary>
+            Current node position X coordinate.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.NodeVisual.Y">
+            <summary>
+            Current node position Y coordinate.
+            </summary>
+        </member>
+        <member name="F:NodeEditor.NodeVisual.Int32Tag">
+            <summary>
+            Tag for various puposes - may be used freely.
+            </summary>
+        </member>
+        <member name="M:NodeEditor.NodeVisual.GetNodeContext">
+            <summary>
+            Returns node context which is dynamic type. It will contain all node default input/output properties.
+            </summary>
+        </member>
+        <member name="M:NodeEditor.NodeVisual.GetNodeBounds">
+            <summary>
+            Returns current size of the node.
+            </summary>        
+        </member>
+        <member name="M:NodeEditor.NodeVisual.GetHeaderSize">
+            <summary>
+            Returns current size of node caption (header belt).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NodeEditor.NodeVisual.Draw(System.Drawing.Graphics,System.Drawing.Point,System.Windows.Forms.MouseButtons)">
+            <summary>
+            Allows node to be drawn on given Graphics context.       
+            </summary>
+            <param name="g">Graphics context.</param>
+            <param name="mouseLocation">Location of the mouse relative to NodesControl instance.</param>
+            <param name="mouseButtons">Mouse buttons that are pressed while drawing node.</param>
+        </member>
+        <member name="T:NodeEditor.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.Resources.exec">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.Resources.nodeed">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:NodeEditor.Resources.socket">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>
