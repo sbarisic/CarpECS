@@ -25,9 +25,9 @@
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapEdit));
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Test");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Misc", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Test");
+			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Misc", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.toolStripTree = new System.Windows.Forms.ToolStrip();
 			this.btnRefreshTree = new System.Windows.Forms.ToolStripButton();
@@ -54,6 +54,7 @@
 			this.Grid = new MapEditNamespace.ReoGridControlHAAAX();
 			this.iconList = new System.Windows.Forms.ImageList(this.components);
 			this.formTimer = new System.Windows.Forms.Timer(this.components);
+			this.nodesCtrl = new NodeEditor.NodesControl();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -78,6 +79,7 @@
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.nodesCtrl);
 			this.splitContainer1.Panel2.Controls.Add(this.PropertyPanel);
 			this.splitContainer1.Panel2.Controls.Add(this.GridPanel);
 			this.splitContainer1.Size = new System.Drawing.Size(1473, 890);
@@ -132,12 +134,12 @@
 			this.Tree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.Tree.Location = new System.Drawing.Point(3, 28);
 			this.Tree.Name = "Tree";
-			treeNode1.Name = "Test";
-			treeNode1.Text = "Test";
-			treeNode2.Name = "Misc";
-			treeNode2.Text = "Misc";
+			treeNode3.Name = "Test";
+			treeNode3.Text = "Test";
+			treeNode4.Name = "Misc";
+			treeNode4.Text = "Misc";
 			this.Tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode4});
 			this.Tree.Size = new System.Drawing.Size(294, 856);
 			this.Tree.TabIndex = 0;
 			// 
@@ -348,6 +350,14 @@
 			// 
 			this.formTimer.Interval = 50;
 			// 
+			// nodesCtrl
+			// 
+			this.nodesCtrl.Context = null;
+			this.nodesCtrl.Location = new System.Drawing.Point(46, 524);
+			this.nodesCtrl.Name = "nodesCtrl";
+			this.nodesCtrl.Size = new System.Drawing.Size(1019, 338);
+			this.nodesCtrl.TabIndex = 3;
+			// 
 			// MapEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,5 +411,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.Timer formTimer;
 		private System.Windows.Forms.ToolStripButton btnTracer;
+		private NodeEditor.NodesControl nodesCtrl;
 	}
 }

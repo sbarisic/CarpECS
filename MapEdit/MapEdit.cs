@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NodeEditor;
 
 using unvell.ReoGrid;
 using unvell.ReoGrid.Graphics;
@@ -474,7 +475,7 @@ namespace MapEdit {
 
 			//
 			try {
-				EditableData NewTable = Utils.ParseTableFromClipboard();
+				EditableData NewTable = Utils.ParseTableFromClipboard(out LookupTable2D LookupTable);
 				AddEditable(NewTable);
 			} catch (Exception) {
 			}

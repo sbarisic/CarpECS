@@ -13,7 +13,8 @@ using unvell.ReoGrid.Graphics;
 namespace MapEdit {
 	public enum EditMode {
 		Grid,
-		Property
+		Property,
+		Nodes
 	}
 
 	public static class Utils {
@@ -128,7 +129,7 @@ namespace MapEdit {
 			return Arr;
 		}
 
-		public static EditableData ParseTableFromText(string RawText) {
+		public static EditableData ParseTableFromText(string RawText, out LookupTable2D LookupTable) {
 			string[] Lines = RawText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
 			string[][] Table = Lines.Select(L => L.Split(new[] { '\t', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToArray()).ToArray();
 
@@ -153,17 +154,17 @@ namespace MapEdit {
 
 			LookupTableAxis TableXAxis = new LookupTableAxis(XAxisUnit, ParseStringArrayToDouble(XAxisLabels));
 			LookupTableAxis TableYAxis = new LookupTableAxis(YAxisUnit, ParseStringArrayToDouble(YAxisLabels));
-			LookupTable2D LookupTable = new LookupTable2D(TableXAxis, TableYAxis, RawTableDataFloat);
+			LookupTable = new LookupTable2D(TableXAxis, TableYAxis, RawTableDataFloat);
 
 			EditableData EditData = new EditableData(EditMode.Grid, LookupTable, Unit);
-			EditData.DataProperties = new LookupTableSettings(LookupTable);
+			//EditData.DataProperties = new LookupTableSettings(LookupTable);
 
 			return EditData;
 		}
 
-		public static EditableData ParseTableFromClipboard() {
+		public static EditableData ParseTableFromClipboard(out LookupTable2D LookupTable) {
 			string RawText = Clipboard.GetText().Trim();
-			return ParseTableFromText(RawText);
+			return ParseTableFromText(RawText, out LookupTable);
 		}
 	}
 }

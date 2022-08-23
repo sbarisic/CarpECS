@@ -70,6 +70,9 @@
     <Compile Include="EditableData\EditableData.cs">
       <SubType>Misc</SubType>
     </Compile>
+    <Compile Include="EditableData\BehaviorEditor.cs">
+      <SubType>Properties</SubType>
+    </Compile>
     <Compile Include="EditableData\LookupTableSettings.cs">
       <SubType>Properties</SubType>
     </Compile>
