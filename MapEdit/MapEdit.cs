@@ -24,6 +24,8 @@ namespace MapEdit {
 	public delegate void OnCellAction(int X, int Y, ref Cell C);
 
 	public partial class MapEdit : Form {
+		ECUContext ecuContext;
+
 		EditableData[] DataSet;
 		EditableData CurrentEdited;
 
@@ -39,6 +41,8 @@ namespace MapEdit {
 		}
 
 		private void MapEdit_Load(object sender, EventArgs e) {
+			ecuContext = new ECUContext();
+
 			Properties.PropertySort = PropertySort.Categorized;
 
 			Grid.DisableSettings(WorkbookSettings.View_ShowSheetTabControl);
@@ -310,6 +314,9 @@ namespace MapEdit {
 			PropertyPanel.Dock = DockStyle.Fill;
 			PropertyPanel.Visible = false;
 
+			nodesCtrl.Dock = DockStyle.Fill;
+			nodesCtrl.Visible = false;
+
 			if (Data == null)
 				return;
 
@@ -330,7 +337,7 @@ namespace MapEdit {
 							Worksheet WSheet = Grid.Worksheets.Create(string.Format("{0} / {1}", Data.XAxisName, Data.YAxisName));
 							Data.Worksheet = WSheet;
 
-							
+
 
 							WSheet.DisableSettings(WorksheetSettings.Edit_AllowAdjustColumnWidth | WorksheetSettings.Edit_AllowAdjustRowHeight);
 							WSheet.DisableSettings(WorksheetSettings.Edit_DragSelectionToMoveCells);
@@ -351,6 +358,15 @@ namespace MapEdit {
 				case EditMode.Property: {
 						PropertyPanel.Visible = true;
 						Properties.SelectedObject = Data;
+						break;
+					}
+
+
+				case EditMode.Nodes: {
+						nodesCtrl.Visible = true;
+						nodesCtrl.Context = ecuContext;
+
+
 						break;
 					}
 
@@ -526,6 +542,30 @@ namespace MapEdit {
 						C.Data = (double)C.Data * F;
 					});
 				}
+			}
+		}
+
+		private void compileBtn_Click(object sender, EventArgs e) {
+			if (CurrentEdited == null)
+				return;
+
+			switch (CurrentEdited.EditMode) {
+				case EditMode.Grid:
+					break;
+
+				case EditMode.Property:
+					break;
+
+				case EditMode.Nodes: {
+						nodesCtrl.Execute();
+
+
+						
+						break;
+					}
+
+				default:
+					break;
 			}
 		}
 	}
