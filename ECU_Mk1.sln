@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ECU_Mk1", "ECU_Mk1\ECU_Mk1.vcxproj", "{93D1952A-C50F-4B4E-987E-850502B0D526}"
 EndProject
@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEdit", "MapEdit\MapEdit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{1E09552C-1921-4083-AD65-9EE6CA6101D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboCalculator", "TurboCalculator\TurboCalculator.csproj", "{87046866-831A-4F52-AD0E-6A80683D43F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCalculator", "TurboCalculator\TurboCalculator.csproj", "{87046866-831A-4F52-AD0E-6A80683D43F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InjectorCalculator", "InjectorCalculator\InjectorCalculator.csproj", "{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,14 @@ Global
 		{87046866-831A-4F52-AD0E-6A80683D43F8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87046866-831A-4F52-AD0E-6A80683D43F8}.Release|x64.ActiveCfg = Release|Any CPU
 		{87046866-831A-4F52-AD0E-6A80683D43F8}.Release|x64.Build.0 = Release|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Debug|x64.Build.0 = Debug|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Release|x64.ActiveCfg = Release|Any CPU
+		{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
