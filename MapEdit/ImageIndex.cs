@@ -20,6 +20,7 @@ namespace MapEdit {
 
         // Program aliases
         CATEGORY = APPLICATION,
-        PROPERTY_EDIT = PAGE_EDIT
+        PROPERTY_EDIT = PAGE_EDIT,
+        NODE_EDIT = COG,
     }
 }

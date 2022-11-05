@@ -95,6 +95,10 @@ namespace MapEdit {
 					Icon = ImageIndex.PROPERTY_EDIT;
 					break;
 
+				case EditMode.Nodes:
+					Icon = ImageIndex.NODE_EDIT;
+					break;
+
 				default:
 					throw new NotImplementedException();
 			}

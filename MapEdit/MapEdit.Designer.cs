@@ -25,15 +25,16 @@
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapEdit));
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Test");
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Misc", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Test");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Misc", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.toolStripTree = new System.Windows.Forms.ToolStrip();
 			this.btnRefreshTree = new System.Windows.Forms.ToolStripButton();
 			this.btnNewTable = new System.Windows.Forms.ToolStripButton();
 			this.btnDeleteTable = new System.Windows.Forms.ToolStripButton();
 			this.Tree = new System.Windows.Forms.TreeView();
+			this.nodesCtrl = new NodeEditor.NodesControl();
 			this.PropertyPanel = new System.Windows.Forms.Panel();
 			this.Properties = new System.Windows.Forms.PropertyGrid();
 			this.GridPanel = new System.Windows.Forms.Panel();
@@ -50,11 +51,11 @@
 			this.btnAdd = new System.Windows.Forms.ToolStripButton();
 			this.btnMul = new System.Windows.Forms.ToolStripButton();
 			this.XAxisLabel = new System.Windows.Forms.Label();
-			this.YAxisLabel = new RotatingLabel.RotatingLabel();
-			this.Grid = new MapEditNamespace.ReoGridControlHAAAX();
 			this.iconList = new System.Windows.Forms.ImageList(this.components);
 			this.formTimer = new System.Windows.Forms.Timer(this.components);
-			this.nodesCtrl = new NodeEditor.NodesControl();
+			this.YAxisLabel = new RotatingLabel.RotatingLabel();
+			this.Grid = new MapEditNamespace.ReoGridControlHAAAX();
+			this.compileBtn = new System.Windows.Forms.ToolStripButton();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -83,7 +84,7 @@
 			this.splitContainer1.Panel2.Controls.Add(this.PropertyPanel);
 			this.splitContainer1.Panel2.Controls.Add(this.GridPanel);
 			this.splitContainer1.Size = new System.Drawing.Size(1473, 890);
-			this.splitContainer1.SplitterDistance = 300;
+			this.splitContainer1.SplitterDistance = 351;
 			this.splitContainer1.SplitterWidth = 6;
 			this.splitContainer1.TabIndex = 0;
 			// 
@@ -92,10 +93,11 @@
 			this.toolStripTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnRefreshTree,
             this.btnNewTable,
-            this.btnDeleteTable});
+            this.btnDeleteTable,
+            this.compileBtn});
 			this.toolStripTree.Location = new System.Drawing.Point(0, 0);
 			this.toolStripTree.Name = "toolStripTree";
-			this.toolStripTree.Size = new System.Drawing.Size(300, 25);
+			this.toolStripTree.Size = new System.Drawing.Size(351, 25);
 			this.toolStripTree.TabIndex = 1;
 			this.toolStripTree.Text = "toolStrip2";
 			// 
@@ -134,14 +136,22 @@
 			this.Tree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.Tree.Location = new System.Drawing.Point(3, 28);
 			this.Tree.Name = "Tree";
-			treeNode3.Name = "Test";
-			treeNode3.Text = "Test";
-			treeNode4.Name = "Misc";
-			treeNode4.Text = "Misc";
+			treeNode1.Name = "Test";
+			treeNode1.Text = "Test";
+			treeNode2.Name = "Misc";
+			treeNode2.Text = "Misc";
 			this.Tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-			this.Tree.Size = new System.Drawing.Size(294, 856);
+            treeNode2});
+			this.Tree.Size = new System.Drawing.Size(345, 856);
 			this.Tree.TabIndex = 0;
+			// 
+			// nodesCtrl
+			// 
+			this.nodesCtrl.Context = null;
+			this.nodesCtrl.Location = new System.Drawing.Point(46, 557);
+			this.nodesCtrl.Name = "nodesCtrl";
+			this.nodesCtrl.Size = new System.Drawing.Size(994, 131);
+			this.nodesCtrl.TabIndex = 3;
 			// 
 			// PropertyPanel
 			// 
@@ -299,6 +309,22 @@
 			this.XAxisLabel.TabIndex = 1;
 			this.XAxisLabel.Text = "X Axis";
 			// 
+			// iconList
+			// 
+			this.iconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconList.ImageStream")));
+			this.iconList.TransparentColor = System.Drawing.Color.Transparent;
+			this.iconList.Images.SetKeyName(0, "table.png");
+			this.iconList.Images.SetKeyName(1, "table_gear.png");
+			this.iconList.Images.SetKeyName(2, "script.png");
+			this.iconList.Images.SetKeyName(3, "application.png");
+			this.iconList.Images.SetKeyName(4, "cog.png");
+			this.iconList.Images.SetKeyName(5, "pencil.png");
+			this.iconList.Images.SetKeyName(6, "page_edit.png");
+			// 
+			// formTimer
+			// 
+			this.formTimer.Interval = 50;
+			// 
 			// YAxisLabel
 			// 
 			this.YAxisLabel.AutoSize = true;
@@ -334,29 +360,14 @@
 			this.Grid.TabIndex = 0;
 			this.Grid.Text = "reoGridControl1";
 			// 
-			// iconList
+			// compileBtn
 			// 
-			this.iconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconList.ImageStream")));
-			this.iconList.TransparentColor = System.Drawing.Color.Transparent;
-			this.iconList.Images.SetKeyName(0, "table.png");
-			this.iconList.Images.SetKeyName(1, "table_gear.png");
-			this.iconList.Images.SetKeyName(2, "script.png");
-			this.iconList.Images.SetKeyName(3, "application.png");
-			this.iconList.Images.SetKeyName(4, "cog.png");
-			this.iconList.Images.SetKeyName(5, "pencil.png");
-			this.iconList.Images.SetKeyName(6, "page_edit.png");
-			// 
-			// formTimer
-			// 
-			this.formTimer.Interval = 50;
-			// 
-			// nodesCtrl
-			// 
-			this.nodesCtrl.Context = null;
-			this.nodesCtrl.Location = new System.Drawing.Point(46, 524);
-			this.nodesCtrl.Name = "nodesCtrl";
-			this.nodesCtrl.Size = new System.Drawing.Size(1019, 338);
-			this.nodesCtrl.TabIndex = 3;
+			this.compileBtn.Image = ((System.Drawing.Image)(resources.GetObject("compileBtn.Image")));
+			this.compileBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.compileBtn.Name = "compileBtn";
+			this.compileBtn.Size = new System.Drawing.Size(72, 22);
+			this.compileBtn.Text = "Compile";
+			this.compileBtn.Click += new System.EventHandler(this.compileBtn_Click);
 			// 
 			// MapEdit
 			// 
@@ -412,5 +423,6 @@
 		private System.Windows.Forms.Timer formTimer;
 		private System.Windows.Forms.ToolStripButton btnTracer;
 		private NodeEditor.NodesControl nodesCtrl;
+		private System.Windows.Forms.ToolStripButton compileBtn;
 	}
 }
