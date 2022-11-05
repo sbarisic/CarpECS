@@ -8,124 +8,124 @@ using static Raylib_cs.Raylib;
 using System.Diagnostics;
 
 namespace InjectorCalculator {
-    static class Program {
-        const int W = 1600;
-        const int H = 1000;
+	static class Program {
+		const int W = 1600;
+		const int H = 1000;
 
-        static Vector2 Origin;
-        static Font TxtFnt;
+		static Vector2 Origin;
+		static Font TxtFnt;
 
-        static RaylibGrid Grid;
+		static RaylibGrid Grid;
 
-        static void Main(string[] args) {
-            SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT);
-            SetConfigFlags(ConfigFlags.FLAG_WINDOW_HIGHDPI);
-            InitWindow(W, H, "Injector Calculator");
-            SetTargetFPS(30);
+		static void Main(string[] args) {
+			SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT);
+			SetConfigFlags(ConfigFlags.FLAG_WINDOW_HIGHDPI);
+			InitWindow(W, H, "Injector Calculator");
+			SetTargetFPS(30);
 
-            Origin = new Vector2(50, 50);
+			Origin = new Vector2(50, 50);
 
-            TxtFnt = LoadFont("consola.ttf");
-            TxtFnt.baseSize = 36;
-            SetTextureFilter(TxtFnt.texture, TextureFilter.TEXTURE_FILTER_BILINEAR);
+			TxtFnt = LoadFont("consola.ttf");
+			TxtFnt.baseSize = 36;
+			SetTextureFilter(TxtFnt.texture, TextureFilter.TEXTURE_FILTER_BILINEAR);
 
-            Grid = new RaylibGrid(new Vector2(60, 50), new Vector2(W - 100, H - 100), W, H);
-            Grid.SetAxis("PWidth [ms]", "Flow", new Vector2(20, 0.1f), new Vector2(0.5f, 0.01f));
-            Grid.SetFont(TxtFnt);
+			Grid = new RaylibGrid(new Vector2(60, 50), new Vector2(W - 100, H - 100), W, H);
+			Grid.SetAxis("PWidth [ms]", "Flow", new Vector2(20, 0.1f), new Vector2(0.5f, 0.01f));
+			Grid.SetFont(TxtFnt);
 
-            LoadData();
+			LoadData();
 
-            float MS = CalcPW(0.076f, 14.7f, out float MSIdeal);
-            Console.WriteLine("{0} ms; {1} ideal ms", MS, MSIdeal);
+			float MS = CalcPW(0.076f, 14.7f, out float MSIdeal);
+			Console.WriteLine("{0} ms; {1} ideal ms", MS, MSIdeal);
 
-            CSVPoint[] Points = HPTCSV.ParseEntriesHPT("test1.csv");
+			CSVPoint[] Points = HPTCSV.ParseEntriesHPT("test1.csv");
 
-            while (!WindowShouldClose())    // Detect window close button or ESC key
-            {
-                BeginDrawing();
-                ClearBackground(Color.BLACK);
-                Grid.Draw();
-                Draw();
-
-
-                for (int i = 0; i < Points.Length; i++) {
-                    CSVPoint Pt = Points[i];
-
-                    float Stoich = 14.1298828125f;
-                    float AFRFromEQ = Points[i].EQ * Stoich;
-                    float Trim = ((Points[i].LTFT + Points[i].STFT) / 100);
-
-                    AFRFromEQ = AFRFromEQ - (AFRFromEQ * Trim);
+			while (!WindowShouldClose())    // Detect window close button or ESC key
+			{
+				BeginDrawing();
+				ClearBackground(Color.BLACK);
+				Grid.Draw();
+				Draw();
 
 
+				for (int i = 0; i < Points.Length; i++) {
+					CSVPoint Pt = Points[i];
 
-                    Grid.PlotPixel(new Vector2(Points[i].InjMS, Points[i].CylAirmass / AFRFromEQ), Color.BLUE);
-                }
+					float Stoich = 14.1298828125f;
+					float AFRFromEQ = (Points[i].EQ / 14.7f) * Stoich;
+					float Trim = ((Points[i].LTFT + Points[i].STFT) / 100);
 
-
-                EndDrawing();
-
-                Vector2 MousePos = GetMousePosition();
-                MousePos = new Vector2(MousePos.X, H - MousePos.Y);
-
-
-                //bool Left = IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT);
-                //bool Right = IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_RIGHT);
-            }
-
-            CloseWindow();
-        }
-
-        static void Draw() {
-            int MassCount = 400;
-            float MassStep = Grid.AxisSize.Y / MassCount;
-
-            Grid.BeginLine(false);
-
-            for (int i = 0; i < MassCount; i++) {
-                float FuelMass = i * MassStep;
-                float MS = CalcPW(FuelMass, out float MSIdeal);
-
-                Grid.PlotPixel(new Vector2(MSIdeal, FuelMass), Color.GREEN);
-                Grid.PlotLinePoint(new Vector2(MS, FuelMass));
-            }
-
-            Grid.EndLine(1, Color.RED);
-        }
-
-        static ECUMap Map_OffsetPressIGNV;
-        static ECUMap Map_FlowRateMultVsIAT;
-        static ECUMap Map_ShortPulseAdder;
-
-        static float CalcPW(float AirMass, float AFR, out float PWIdeal) {
-            return CalcPW(AirMass / AFR, out PWIdeal);
-        }
-
-        static float CalcPW(float FuelMass, out float PWIdeal) {
-            float BatteryVoltage = 14;
-            float IAT = 30.0f;
-            float ShortPulseLimit = 128.0f;
-            float StaticFlowRate = 6.322001953125f; // g/s
+					AFRFromEQ = AFRFromEQ - (AFRFromEQ * Trim);
 
 
-            float OffsetPressIGNV = Map_OffsetPressIGNV.Index(0, BatteryVoltage);
-            float FlowRateMultVsIAT = Map_FlowRateMultVsIAT.Index(IAT, 0);
 
-            float FlowRate = StaticFlowRate * FlowRateMultVsIAT;
+					Grid.PlotPixel(new Vector2(Points[i].InjMS, Points[i].CylAirmass / AFRFromEQ), Color.BLUE);
+				}
 
-            float MS = FuelMass / FlowRate * 1000;
-            PWIdeal = FuelMass / StaticFlowRate * 1000;
 
-            float ShortPulseAdder = 0;
+				EndDrawing();
 
-            if (MS < ShortPulseLimit)
-                ShortPulseAdder = Map_ShortPulseAdder.Index(MS, 0);
+				Vector2 MousePos = GetMousePosition();
+				MousePos = new Vector2(MousePos.X, H - MousePos.Y);
 
-            return MS + ShortPulseAdder + OffsetPressIGNV;
 
-        }
-        static void LoadData() {
-            Map_OffsetPressIGNV = new ECUMap(@"
+				//bool Left = IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT);
+				//bool Right = IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_RIGHT);
+			}
+
+			CloseWindow();
+		}
+
+		static void Draw() {
+			int MassCount = 400;
+			float MassStep = Grid.AxisSize.Y / MassCount;
+
+			Grid.BeginLine(false);
+
+			for (int i = 0; i < MassCount; i++) {
+				float FuelMass = i * MassStep;
+				float MS = CalcPW(FuelMass, out float MSIdeal);
+
+				Grid.PlotPixel(new Vector2(MSIdeal, FuelMass), Color.GREEN);
+				Grid.PlotLinePoint(new Vector2(MS, FuelMass));
+			}
+
+			Grid.EndLine(1, Color.RED);
+		}
+
+		static ECUMap Map_OffsetPressIGNV;
+		static ECUMap Map_FlowRateMultVsIAT;
+		static ECUMap Map_ShortPulseAdder;
+
+		static float CalcPW(float AirMass, float AFR, out float PWIdeal) {
+			return CalcPW(AirMass / AFR, out PWIdeal);
+		}
+
+		static float CalcPW(float FuelMass, out float PWIdeal) {
+			float BatteryVoltage = 14;
+			float IAT = 30.0f;
+			float ShortPulseLimit = 128.0f;
+			float StaticFlowRate = 6.2998046875f; // g/s
+
+
+			float OffsetPressIGNV = Map_OffsetPressIGNV.Index(0, BatteryVoltage);
+			float FlowRateMultVsIAT = Map_FlowRateMultVsIAT.Index(IAT, 0);
+
+			float FlowRate = StaticFlowRate * FlowRateMultVsIAT;
+
+			float MS = FuelMass / FlowRate * 1000;
+			PWIdeal = FuelMass / StaticFlowRate * 1000;
+
+			float ShortPulseAdder = 0;
+
+			if (MS < ShortPulseLimit)
+				ShortPulseAdder = Map_ShortPulseAdder.Index(MS, 0);
+
+			return MS + ShortPulseAdder + OffsetPressIGNV;
+
+		}
+		static void LoadData() {
+			Map_OffsetPressIGNV = new ECUMap(@"
 ms	128	148	168	188	208	228	248	268	288	308	328	348	368	388	408	428	448	468	488	508	528	548	568	588	608	628	648	668	688	708	728	748	768	kPa
 4	13.96875	14.28125	14.59375	14.90625	15.21875	15.53125	15.84375	16.15625	16.46875	16.78125	17.09375	17.40625	17.71875	18.03125	18.34375	18.65625	18.96875	19.28125	19.59375	19.90625	20.21875	20.53125	20.84375	21.15625	21.46875	21.78125	22.09375	22.40625	22.71875	23.03125	23.34375	23.65625	23.96875
 5	12.7109375	13.0234375	13.3359375	13.6484375	13.9609375	14.2734375	14.5859375	14.8984375	15.2109375	15.5234375	15.8359375	16.1484375	16.4609375	16.7734375	17.0859375	17.3984375	17.7109375	18.0234375	18.3359375	18.6484375	18.9609375	19.2734375	19.5859375	19.8984375	20.2109375	20.5234375	20.8359375	21.1484375	21.4609375	21.7734375	22.0859375	22.3984375	22.7109375
@@ -147,15 +147,15 @@ ms	128	148	168	188	208	228	248	268	288	308	328	348	368	388	408	428	448	468	488	5
 V
 ");
 
-            Map_FlowRateMultVsIAT = new ECUMap(@"
+			Map_FlowRateMultVsIAT = new ECUMap(@"
 	-40	-30	-20	-10	0	10	20	30	40	50	60	70	80	90	100	110	120	°C
 Multiplier	1.030029296875	1.0206298828125	1.01129150390625	1.00189208984375	0.9925537109375	0.983154296875	0.9737548828125	0.96441650390625	0.95501708984375	0.94561767578125	0.936279296875	0.9268798828125	0.91754150390625	0.90814208984375	0.89874267578125	0.889404296875	0.8800048828125
 ");
 
-            Map_ShortPulseAdder = new ECUMap(@"
+			Map_ShortPulseAdder = new ECUMap(@"
 ms	0	0.125	0.25	0.375	0.5	0.625	0.75	0.875	1	1.125	1.25	1.375	1.5	1.625	1.75	1.875	2	2.125	2.25	2.375	2.5	2.625	2.75	2.875	3	3.125	3.25	3.375	3.5	3.625	3.75	3.875	4	x
 PulseWidthAdder	0	5.75	4.375	3.125	1.875	1.125	0.625	0.25	0.125	0	-0.125	-0.125	-0.25	-0.25	-0.25	-0.25	-0.25	-0.25	-0.25	-0.25	-0.25	-0.125	-0.125	-0.125	-0.125	-0.125	-0.125	-0.125	-0.125	-0.125	-0.125	-0.125	0
 ");
-        }
-    }
+		}
+	}
 }
