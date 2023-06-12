@@ -90,13 +90,29 @@ namespace InjectorCalculator {
 			for (int i = 0; i < MassCount; i++) {
 				float FuelMass = i * MassStep;
 
-				float MS = CalcPWFord(FuelMass, out float MSIdeal);
+				float MS = CalcPWFord(FuelMass, false, out float MSIdeal);
 
 				Grid.PlotPixel(new Vector2(MSIdeal, FuelMass), Color.GRAY);
 				Grid.PlotLinePoint(new Vector2(MS, FuelMass));
 			}
 
 			Grid.EndLine(1, Color.BLUE);
+
+			//---
+
+
+			Grid.BeginLine(false);
+
+			for (int i = 0; i < MassCount; i++) {
+				float FuelMass = i * MassStep;
+
+				float MS = CalcPWFord(FuelMass, true, out float MSIdeal);
+
+				Grid.PlotPixel(new Vector2(MSIdeal, FuelMass), Color.GRAY);
+				Grid.PlotLinePoint(new Vector2(MS, FuelMass));
+			}
+
+			Grid.EndLine(1, Color.GREEN);
 
 			//---
 
@@ -133,9 +149,13 @@ namespace InjectorCalculator {
 		const float BatteryVoltage = 13.0f;
 		const bool IgnoreIGNV = false;
 
-		static float CalcPWFord(float FuelMass, out float PWIdeal) {
+		static float CalcPWFord(float FuelMass, bool Alternate, out float PWIdeal) {
 			//float PressureDropRef = 270.0f; // kPa
 			float RailFuelPressure = 270.0f; // kPa
+
+			if (Alternate) {
+				RailFuelPressure = 360.0f;
+			}
 
 			float FlowRateLow = 9.322684f; // g/s
 			float FlowRateHigh = 7.165399f; // g/s
