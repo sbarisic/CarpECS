@@ -64,8 +64,8 @@ void obd2_handle_service_01(int add_bytes, byte pid, byte *buf)
     }
 }
 
-
-void obd2_create_response_frame_mode06(byte *out, byte service_mode, byte tid, byte limit_type, byte A, byte B, byte C, byte D)
+void obd2_create_response_frame_mode06(byte *out, byte service_mode, byte tid, byte limit_type, byte A, byte B, byte C,
+                                       byte D)
 {
     out[0] = 7;
     out[1] = service_mode + 0x40;
@@ -269,7 +269,8 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
         byte A = bit7(0) | bit6(1) | bit5(0) | bit4(1) | bit3(0) | bit2(1) | bit1(0) | bit0(0);
         byte B = bit7(0) | bit6(1) | bit5(0) | bit4(0) | bit3(0) | bit2(0) | bit1(0) | bit0(0);
         byte C = bit7(0) | bit6(0) | bit5(0) | bit4(0) | bit3(0) | bit2(0) | bit1(0) | bit0(0);
-        byte D = bit7(0) | bit6(0) | bit5(0) | bit4(0) | bit3(0) | bit2(0) | bit1(0) | bit0(0); // bit7(0) | bit6(0) | bit5(0) | bit4(0) | bit3(0) | bit2(0) | bit1(0) | bit0(0);
+        byte D = bit7(0) | bit6(0) | bit5(0) | bit4(0) | bit3(0) | bit2(0) | bit1(0) |
+                 bit0(0); // bit7(0) | bit6(0) | bit5(0) | bit4(0) | bit3(0) | bit2(0) | bit1(0) | bit0(0);
         byte ABCD[4] = {A, B, C, D};
 
         obd2_create_response_frame(tmp8, service_mode, pid, 4, ABCD);
@@ -277,9 +278,17 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
     }
     else if (pid == 0x2) // VIN
     {
-        byte frame1[8] = {0x10, 2 + 18, 0x49,  pid, 1, vehicle_Vin[0], vehicle_Vin[1],  vehicle_Vin[2]};
-        byte frame2[8] = {0x21, vehicle_Vin[3], vehicle_Vin[4], vehicle_Vin[5], vehicle_Vin[6], vehicle_Vin[7], vehicle_Vin[8], vehicle_Vin[9]};
-        byte frame3[8] = {0x22, vehicle_Vin[10], vehicle_Vin[11], vehicle_Vin[12], vehicle_Vin[13], vehicle_Vin[14], vehicle_Vin[15], vehicle_Vin[16]};
+        byte frame1[8] = {0x10, 2 + 18, 0x49, pid, 1, vehicle_Vin[0], vehicle_Vin[1], vehicle_Vin[2]};
+        byte frame2[8] = {0x21,           vehicle_Vin[3], vehicle_Vin[4], vehicle_Vin[5],
+                          vehicle_Vin[6], vehicle_Vin[7], vehicle_Vin[8], vehicle_Vin[9]};
+        byte frame3[8] = {0x22,
+                          vehicle_Vin[10],
+                          vehicle_Vin[11],
+                          vehicle_Vin[12],
+                          vehicle_Vin[13],
+                          vehicle_Vin[14],
+                          vehicle_Vin[15],
+                          vehicle_Vin[16]};
 
         obd2_send_frame(REPLY_ID, 8, frame1);
         obd2_send_frame(REPLY_ID, 8, frame2);
@@ -288,8 +297,22 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
     else if (pid == 0x4) // Cal ID
     {
         unsigned char frame1[8] = {0x10, 2 + 18, 0x49, pid, 1, calibration_ID[0], calibration_ID[1], calibration_ID[2]};
-        unsigned char frame2[8] = {0x21, calibration_ID[3], calibration_ID[4], calibration_ID[5], calibration_ID[6], calibration_ID[7], calibration_ID[8], calibration_ID[9]};
-        unsigned char frame3[8] = {0x22, calibration_ID[10], calibration_ID[11], calibration_ID[12], calibration_ID[13], calibration_ID[14], calibration_ID[15], calibration_ID[16]};
+        unsigned char frame2[8] = {0x21,
+                                   calibration_ID[3],
+                                   calibration_ID[4],
+                                   calibration_ID[5],
+                                   calibration_ID[6],
+                                   calibration_ID[7],
+                                   calibration_ID[8],
+                                   calibration_ID[9]};
+        unsigned char frame3[8] = {0x22,
+                                   calibration_ID[10],
+                                   calibration_ID[11],
+                                   calibration_ID[12],
+                                   calibration_ID[13],
+                                   calibration_ID[14],
+                                   calibration_ID[15],
+                                   calibration_ID[16]};
 
         obd2_send_frame(REPLY_ID, 8, frame1);
         obd2_send_frame(REPLY_ID, 8, frame2);
@@ -312,8 +335,10 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
     else if (pid == 0xA) // ECU Name
     {
         unsigned char frame1[8] = {0x10, 2 + 20, 0x49, pid, 1, ecu_Name[0], ecu_Name[1], ecu_Name[2]};
-        unsigned char frame2[8] = {0x21, ecu_Name[3], ecu_Name[4], ecu_Name[5], ecu_Name[6], ecu_Name[7], ecu_Name[8], ecu_Name[9]};
-        unsigned char frame3[8] = {0x22, ecu_Name[10], ecu_Name[11], ecu_Name[12], ecu_Name[13], ecu_Name[14], ecu_Name[15], ecu_Name[16]};
+        unsigned char frame2[8] = {0x21,        ecu_Name[3], ecu_Name[4], ecu_Name[5],
+                                   ecu_Name[6], ecu_Name[7], ecu_Name[8], ecu_Name[9]};
+        unsigned char frame3[8] = {0x22,         ecu_Name[10], ecu_Name[11], ecu_Name[12],
+                                   ecu_Name[13], ecu_Name[14], ecu_Name[15], ecu_Name[16]};
         unsigned char frame4[8] = {0x23, ecu_Name[17], ecu_Name[18]};
 
         obd2_send_frame(REPLY_ID, 8, frame1);
@@ -340,7 +365,7 @@ void obd2_handle_request_frame(int address, byte add_bytes, byte *buf)
     else if (add_bytes == 1 && (buf[0] == 0x03 || buf[0] == 0x07)) // DTCs
     {
         int service_mode = buf[0];
-        //int pid = buf[1];
+        // int pid = buf[1];
 
         Serial.println("################ SERVICE " + String(service_mode));
 

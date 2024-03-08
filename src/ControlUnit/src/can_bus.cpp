@@ -1,7 +1,7 @@
 #include <controlunit.h>
 
-#include <mcp_can.h>
 #include <SPI.h>
+#include <mcp_can.h>
 
 // Set INT to pin 2
 MCP_CAN CAN0(CAN0_CLOCK_SELECT);
@@ -63,7 +63,8 @@ void can0_send_frame(uint32_t id, size_t len, byte *buf)
     CAN0.sendMsgBuf(id, len, buf);
 }
 
-can_frame_handler *can0_attach_handler(uint32_t canid_from_inclusive, uint32_t canid_to_inclusive, can_frame_handler_func func)
+can_frame_handler *can0_attach_handler(uint32_t canid_from_inclusive, uint32_t canid_to_inclusive,
+                                       can_frame_handler_func func)
 {
     if (can_handlers_count >= MAX_CAN_HANDLERS)
         return NULL;

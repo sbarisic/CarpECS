@@ -6,13 +6,13 @@
 #define DEFINE_GLOBAL(type, name, val) extern type name
 #endif
 
-DEFINE_GLOBAL(byte, vehicle_Vin[18], "12345678910111213");             // Vechicle VIN
+DEFINE_GLOBAL(byte, vehicle_Vin[18], "12345678910111213");    // Vechicle VIN
 DEFINE_GLOBAL(byte, calibration_ID[18], "12345678910111213"); // Calibration ID
 DEFINE_GLOBAL(byte, cvn_ID[18], "12345678910111213");         // CVN
 DEFINE_GLOBAL(byte, ecu_Name[19], "ECM-EngineControl");       // ECU Name
-DEFINE_GLOBAL(byte, obd_Std, 6);                                       // OBD standards https://en.wikipedia.org/wiki/OBD-II_PIDs#Service_01_PID_1C
-DEFINE_GLOBAL(byte, fuel_Type, 1);                                     // Fuel Type Coding https://en.wikipedia.org/wiki/OBD-II_PIDs#Fuel_Type_Coding
-DEFINE_GLOBAL(char, FW_Version[], "1.0");                              // Current Firmware Version
+DEFINE_GLOBAL(byte, obd_Std, 6);          // OBD standards https://en.wikipedia.org/wiki/OBD-II_PIDs#Service_01_PID_1C
+DEFINE_GLOBAL(byte, fuel_Type, 1);        // Fuel Type Coding https://en.wikipedia.org/wiki/OBD-II_PIDs#Fuel_Type_Coding
+DEFINE_GLOBAL(char, FW_Version[], "1.0"); // Current Firmware Version
 
 DEFINE_GLOBAL(bool, MIL, false);
 DEFINE_GLOBAL(byte, CEL_Codes, 0);

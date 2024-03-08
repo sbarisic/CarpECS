@@ -37,7 +37,8 @@ boolean can_init();
 void can_print_frame(uint32_t id, size_t len, byte *buf, bool isOut);
 void can0_send_frame(uint32_t id, size_t len, byte *buf);
 
-can_frame_handler *can0_attach_handler(uint32_t canid_from_inclusive, uint32_t canid_to_inclusive, can_frame_handler_func func);
+can_frame_handler *can0_attach_handler(uint32_t canid_from_inclusive, uint32_t canid_to_inclusive,
+                                       can_frame_handler_func func);
 
 // OBD-II
 //================================================================================
