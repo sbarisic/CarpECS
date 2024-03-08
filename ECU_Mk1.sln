@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ECU_Mk1", "ECU_Mk1\ECU_Mk1.vcxproj", "{93D1952A-C50F-4B4E-987E-850502B0D526}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEdit", "MapEdit\MapEdit.csproj", "{C2D57876-1D71-40E9-94C3-6BDCD5375B63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{1E09552C-1921-4083-AD65-9EE6CA6101D2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TurboCalculator", "TurboCalculator\TurboCalculator.csproj", "{87046866-831A-4F52-AD0E-6A80683D43F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InjectorCalculator", "InjectorCalculator\InjectorCalculator.csproj", "{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InjectorCalculator", "InjectorCalculator\InjectorCalculator.csproj", "{0BF15EA4-CF4D-4485-9DC2-0324D8235F46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,20 +19,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{93D1952A-C50F-4B4E-987E-850502B0D526}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{93D1952A-C50F-4B4E-987E-850502B0D526}.Debug|x64.ActiveCfg = Debug|x64
-		{93D1952A-C50F-4B4E-987E-850502B0D526}.Debug|x64.Build.0 = Debug|x64
-		{93D1952A-C50F-4B4E-987E-850502B0D526}.Release|Any CPU.ActiveCfg = Release|Win32
-		{93D1952A-C50F-4B4E-987E-850502B0D526}.Release|x64.ActiveCfg = Release|x64
-		{93D1952A-C50F-4B4E-987E-850502B0D526}.Release|x64.Build.0 = Release|x64
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Debug|x64.Build.0 = Debug|Any CPU
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Release|x64.ActiveCfg = Release|Any CPU
-		{C82B8C18-93CF-4D54-98CC-A3C23F947F4C}.Release|x64.Build.0 = Release|Any CPU
 		{C2D57876-1D71-40E9-94C3-6BDCD5375B63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2D57876-1D71-40E9-94C3-6BDCD5375B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2D57876-1D71-40E9-94C3-6BDCD5375B63}.Debug|x64.ActiveCfg = Debug|Any CPU
