@@ -568,5 +568,9 @@ namespace MapEdit {
 					break;
 			}
 		}
-	}
+
+        private void Tree_AfterSelect(object sender, TreeViewEventArgs e) {
+
+        }
+    }
 }
