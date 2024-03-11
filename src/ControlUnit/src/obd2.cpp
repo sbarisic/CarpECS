@@ -279,7 +279,7 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
     else if (pid == 0x2) // VIN
     {
         byte frame1[8] = {0x10, 2 + 18, 0x49, pid, 1, vehicle_Vin[0], vehicle_Vin[1], vehicle_Vin[2]};
-        byte frame2[8] = {0x21,           vehicle_Vin[3], vehicle_Vin[4], vehicle_Vin[5],
+        byte frame2[8] = {0x21, vehicle_Vin[3], vehicle_Vin[4], vehicle_Vin[5],
                           vehicle_Vin[6], vehicle_Vin[7], vehicle_Vin[8], vehicle_Vin[9]};
         byte frame3[8] = {0x22,
                           vehicle_Vin[10],
@@ -335,9 +335,9 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
     else if (pid == 0xA) // ECU Name
     {
         unsigned char frame1[8] = {0x10, 2 + 20, 0x49, pid, 1, ecu_Name[0], ecu_Name[1], ecu_Name[2]};
-        unsigned char frame2[8] = {0x21,        ecu_Name[3], ecu_Name[4], ecu_Name[5],
+        unsigned char frame2[8] = {0x21, ecu_Name[3], ecu_Name[4], ecu_Name[5],
                                    ecu_Name[6], ecu_Name[7], ecu_Name[8], ecu_Name[9]};
-        unsigned char frame3[8] = {0x22,         ecu_Name[10], ecu_Name[11], ecu_Name[12],
+        unsigned char frame3[8] = {0x22, ecu_Name[10], ecu_Name[11], ecu_Name[12],
                                    ecu_Name[13], ecu_Name[14], ecu_Name[15], ecu_Name[16]};
         unsigned char frame4[8] = {0x23, ecu_Name[17], ecu_Name[18]};
 
@@ -346,6 +346,50 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
         obd2_send_frame(REPLY_ID, 8, frame3);
         obd2_send_frame(REPLY_ID, 8, frame4);
     }
+}
+
+// Request data stream service
+void obd2_handle_service_2C(byte add_bytes, byte pid, byte *buf)
+{
+    //const byte service_mode = 0x2C;
+    Serial.println("################ obd2_handle_service_2C " + String(add_bytes, 16) + "; " + String(pid, 16) + "; " + String(buf[0], 16) + "; ");
+
+    if (pid == 0xFE)
+    {
+        obd2_handle_service_01(buf[0], buf[1], buf + 2);
+    }
+}
+
+void obd2_handle_service_3E_AA_A9(byte service_mode, byte add_bytes, byte pid, byte *buf)
+{
+    Serial.println("################ obd2_handle_service_3E_AA " + String(service_mode, 16) + "; " + String(add_bytes, 16) + "; " + String(pid, 16) + "; " + String(buf[0], 16) + "; ");
+
+    byte tmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    obd2_send_frame(REPLY_ID, 8, tmp);
+    return;
+
+    /*if ((service_mode == 0x3E || service_mode == 0xA9 || service_mode == 0xAA) && pid == 0x0)
+    {
+        // byte tmp[4] = {0x00, 0x00, 0x00, 0x00};
+        // obd2_create_response_frame(tmp8, service_mode, pid, 4, tmp);
+
+        byte tmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+        obd2_send_frame(REPLY_ID, 8, tmp);
+    }
+
+    if (service_mode == 0xAA && pid == 0x3)
+    {
+        byte tmp[4] = {0x00, 0x00, 0x00, 0x00};
+        obd2_create_response_frame(tmp8, service_mode, pid, 4, tmp);
+        obd2_send_frame(REPLY_ID, 8, tmp8);
+    }
+
+    // Diagnostics test status
+    if (service_mode == 0xA9 && pid == 0x81)
+    {
+        obd2_create_response_frame(tmp8, service_mode, 0);
+        obd2_send_frame(REPLY_ID, 8, tmp8);
+    }*/
 }
 
 void obd2_handle_request_frame(int address, byte add_bytes, byte *buf)
@@ -361,6 +405,14 @@ void obd2_handle_request_frame(int address, byte add_bytes, byte *buf)
     else if (buf[0] == 0x9)
     {
         obd2_handle_service_09(add_bytes, buf[1], buf + 1);
+    }
+    else if (buf[0] == 0x2C)
+    {
+        obd2_handle_service_2C(add_bytes, buf[1], buf + 1);
+    }
+    else if (buf[0] == 0x3E || buf[0] == 0xAA || buf[0] == 0xA9)
+    {
+        obd2_handle_service_3E_AA_A9(buf[0], add_bytes, buf[1], buf + 2);
     }
     else if (add_bytes == 1 && (buf[0] == 0x03 || buf[0] == 0x07)) // DTCs
     {

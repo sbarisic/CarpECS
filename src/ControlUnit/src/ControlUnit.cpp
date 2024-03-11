@@ -17,7 +17,7 @@ void setup()
     }
     printf("CAN init ok");
 
-    can0_attach_handler(0x7DF, 0x7DF, [](uint32_t canid, byte len, byte *buf) -> void {
+    can0_attach_handler(0x7DF, 0x7E0, [](uint32_t canid, byte len, byte *buf) -> void {
         obd2_handle_request_frame(canid, buf[0], buf + 1);
     });
 
