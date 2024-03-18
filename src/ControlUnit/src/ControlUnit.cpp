@@ -12,10 +12,15 @@ void setup()
 
     while (!can_init())
     {
-        printf("CAN init failed");
+        Serial.println("CAN init failed");
         delay(1000);
     }
-    printf("CAN init ok");
+
+    Serial.println("CAN init ok");
+
+#ifndef ENABLE_SERIAL_PRINT
+    Serial.println("Serial communication is disabled");
+#endif
 
     can0_attach_handler(0x7DF, 0x7E0, [](uint32_t canid, byte len, byte *buf) -> void {
         obd2_handle_request_frame(canid, buf[0], buf + 1);
@@ -28,4 +33,5 @@ void setup()
 
 void loop()
 {
+    can_loop();
 }

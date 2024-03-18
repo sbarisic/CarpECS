@@ -14,6 +14,10 @@
 #define bit7(i) (((i) & 0x1) << 7)
 #endif
 
+// Basic config
+//================================================================================
+//#define ENABLE_SERIAL_PRINT
+
 #include <controlunit_config.h>
 
 void obd2_handle_request_frame(int address, byte add_bytes, byte *buf);
@@ -34,6 +38,7 @@ typedef struct
 } can_frame_handler;
 
 boolean can_init();
+void can_loop();
 void can_print_frame(uint32_t id, size_t len, byte *buf, bool isOut);
 void can0_send_frame(uint32_t id, size_t len, byte *buf);
 

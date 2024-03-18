@@ -16,12 +16,12 @@ byte tmp8[8] = {0};
 #define DECLARE_SERVICE_01_PID_FUNC(FuncName) void FuncName(byte pid, byte service_mode, byte add_bytes, byte *buf)
 
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_00_20_40_60_80_A0);
-DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_05);
+//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_05);
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_1C);
-DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_1F);
-DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_0D);
+//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_1F);
+//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_0D);
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_51);
-DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_0C);
+//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_0C);
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_01_41);
 
 service_01_pid obd2_service_01_PIDs[] = {{0x00, obd2_service_01_pid_00_20_40_60_80_A0},
@@ -31,12 +31,12 @@ service_01_pid obd2_service_01_PIDs[] = {{0x00, obd2_service_01_pid_00_20_40_60_
                                          {0x80, obd2_service_01_pid_00_20_40_60_80_A0},
                                          {0xA0, obd2_service_01_pid_00_20_40_60_80_A0},
 
-                                         {0x05, obd2_service_01_pid_05},
+                                         //{0x05, obd2_service_01_pid_05},
                                          {0x1C, obd2_service_01_pid_1C},
-                                         {0x1F, obd2_service_01_pid_1F},
-                                         {0x0D, obd2_service_01_pid_0D},
+                                         //{0x1F, obd2_service_01_pid_1F},
+                                         //{0x0D, obd2_service_01_pid_0D},
                                          {0x51, obd2_service_01_pid_51},
-                                         {0x0C, obd2_service_01_pid_0C},
+                                         //{0x0C, obd2_service_01_pid_0C},
                                          {0x01, obd2_service_01_pid_01_41},
                                          {0x41, obd2_service_01_pid_01_41}};
 
@@ -116,7 +116,7 @@ void obd2_send_frame(uint32_t id, size_t len, byte *buf)
 // SERVICE 01 PIDs
 //=======================================================================================
 
-// Run time since engine start
+/*// Run time since engine start
 void obd2_service_01_pid_1F(byte pid, byte service_mode, byte add_bytes, byte *buf)
 {
     byte dat[2] = {0x00, 0x3C};
@@ -138,7 +138,7 @@ void obd2_service_01_pid_0D(byte pid, byte service_mode, byte add_bytes, byte *b
     byte dat[1] = {100};
     obd2_create_response_frame(tmp8, service_mode, pid, sizeof(dat) / sizeof(*dat), dat);
     obd2_send_frame(REPLY_ID, 8, tmp8);
-}
+}*/
 
 // OBD standards this vehicle conforms to
 void obd2_service_01_pid_1C(byte pid, byte service_mode, byte add_bytes, byte *buf)
@@ -156,13 +156,13 @@ void obd2_service_01_pid_51(byte pid, byte service_mode, byte add_bytes, byte *b
     obd2_send_frame(REPLY_ID, 8, tmp8);
 }
 
-// ECT
+/*// ECT
 void obd2_service_01_pid_05(byte pid, byte service_mode, byte add_bytes, byte *buf)
 {
     byte dat[1] = {(byte)(95 + 40)};
     obd2_create_response_frame(tmp8, service_mode, pid, sizeof(dat) / sizeof(*dat), dat);
     obd2_send_frame(REPLY_ID, 8, tmp8);
-}
+}*/
 
 void obd2_service_01_pid_01_41(byte pid, byte service_mode, byte add_bytes, byte *buf)
 {
