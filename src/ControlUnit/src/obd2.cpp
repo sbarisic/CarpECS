@@ -15,30 +15,34 @@ byte tmp8[8] = {0};
 
 #define DECLARE_SERVICE_01_PID_FUNC(FuncName) void FuncName(byte pid, byte service_mode, byte add_bytes, byte *buf)
 
+DECLARE_SERVICE_01_PID_FUNC(obd2_service_empty);
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_00_20_40_60_80_A0);
-//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_05);
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_1C);
-//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_1F);
-//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_0D);
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_51);
-//DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_0C);
 DECLARE_SERVICE_01_PID_FUNC(obd2_service_01_pid_01_41);
 
-service_01_pid obd2_service_01_PIDs[] = {{0x00, obd2_service_01_pid_00_20_40_60_80_A0},
-                                         {0x20, obd2_service_01_pid_00_20_40_60_80_A0},
-                                         {0x40, obd2_service_01_pid_00_20_40_60_80_A0},
-                                         {0x60, obd2_service_01_pid_00_20_40_60_80_A0},
-                                         {0x80, obd2_service_01_pid_00_20_40_60_80_A0},
-                                         {0xA0, obd2_service_01_pid_00_20_40_60_80_A0},
+service_01_pid obd2_service_01_PIDs[] = {
+    {0x00, obd2_service_01_pid_00_20_40_60_80_A0},
+    {0x20, obd2_service_01_pid_00_20_40_60_80_A0},
+    {0x40, obd2_service_01_pid_00_20_40_60_80_A0},
+    {0x60, obd2_service_01_pid_00_20_40_60_80_A0},
+    {0x80, obd2_service_01_pid_00_20_40_60_80_A0},
+    {0xA0, obd2_service_01_pid_00_20_40_60_80_A0},
 
-                                         //{0x05, obd2_service_01_pid_05},
-                                         {0x1C, obd2_service_01_pid_1C},
-                                         //{0x1F, obd2_service_01_pid_1F},
-                                         //{0x0D, obd2_service_01_pid_0D},
-                                         {0x51, obd2_service_01_pid_51},
-                                         //{0x0C, obd2_service_01_pid_0C},
-                                         {0x01, obd2_service_01_pid_01_41},
-                                         {0x41, obd2_service_01_pid_01_41}};
+    {0x1C, obd2_service_01_pid_1C},
+    {0x51, obd2_service_01_pid_51},
+    {0x01, obd2_service_01_pid_01_41},
+    {0x41, obd2_service_01_pid_01_41},
+
+    // Ecumaster handled
+    {0x05, obd2_service_empty}, // ECT
+    {0x0B, obd2_service_empty}, // MAP
+    {0x0C, obd2_service_empty}, // RPM
+    {0x0D, obd2_service_empty}, // Vehicle speed
+    {0x0E, obd2_service_empty}, // Timing advance
+    {0x0F, obd2_service_empty}, // IAT
+
+};
 
 size_t obd2_get_service_01_count()
 {
@@ -116,29 +120,9 @@ void obd2_send_frame(uint32_t id, size_t len, byte *buf)
 // SERVICE 01 PIDs
 //=======================================================================================
 
-/*// Run time since engine start
-void obd2_service_01_pid_1F(byte pid, byte service_mode, byte add_bytes, byte *buf)
+void obd2_service_empty(byte pid, byte service_mode, byte add_bytes, byte *buf)
 {
-    byte dat[2] = {0x00, 0x3C};
-    obd2_create_response_frame(tmp8, service_mode, pid, sizeof(dat) / sizeof(*dat), dat);
-    obd2_send_frame(REPLY_ID, 8, tmp8);
 }
-
-// RPM
-void obd2_service_01_pid_0C(byte pid, byte service_mode, byte add_bytes, byte *buf)
-{
-    byte dat[2] = {0x25, 0x25};
-    obd2_create_response_frame(tmp8, service_mode, pid, sizeof(dat) / sizeof(*dat), dat);
-    obd2_send_frame(REPLY_ID, 8, tmp8);
-}
-
-// Vehicle speed
-void obd2_service_01_pid_0D(byte pid, byte service_mode, byte add_bytes, byte *buf)
-{
-    byte dat[1] = {100};
-    obd2_create_response_frame(tmp8, service_mode, pid, sizeof(dat) / sizeof(*dat), dat);
-    obd2_send_frame(REPLY_ID, 8, tmp8);
-}*/
 
 // OBD standards this vehicle conforms to
 void obd2_service_01_pid_1C(byte pid, byte service_mode, byte add_bytes, byte *buf)
@@ -155,14 +139,6 @@ void obd2_service_01_pid_51(byte pid, byte service_mode, byte add_bytes, byte *b
     obd2_create_response_frame(tmp8, service_mode, pid, sizeof(dat) / sizeof(*dat), dat);
     obd2_send_frame(REPLY_ID, 8, tmp8);
 }
-
-/*// ECT
-void obd2_service_01_pid_05(byte pid, byte service_mode, byte add_bytes, byte *buf)
-{
-    byte dat[1] = {(byte)(95 + 40)};
-    obd2_create_response_frame(tmp8, service_mode, pid, sizeof(dat) / sizeof(*dat), dat);
-    obd2_send_frame(REPLY_ID, 8, tmp8);
-}*/
 
 void obd2_service_01_pid_01_41(byte pid, byte service_mode, byte add_bytes, byte *buf)
 {
@@ -279,7 +255,7 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
     else if (pid == 0x2) // VIN
     {
         byte frame1[8] = {0x10, 2 + 18, 0x49, pid, 1, vehicle_Vin[0], vehicle_Vin[1], vehicle_Vin[2]};
-        byte frame2[8] = {0x21, vehicle_Vin[3], vehicle_Vin[4], vehicle_Vin[5],
+        byte frame2[8] = {0x21,           vehicle_Vin[3], vehicle_Vin[4], vehicle_Vin[5],
                           vehicle_Vin[6], vehicle_Vin[7], vehicle_Vin[8], vehicle_Vin[9]};
         byte frame3[8] = {0x22,
                           vehicle_Vin[10],
@@ -335,9 +311,9 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
     else if (pid == 0xA) // ECU Name
     {
         unsigned char frame1[8] = {0x10, 2 + 20, 0x49, pid, 1, ecu_Name[0], ecu_Name[1], ecu_Name[2]};
-        unsigned char frame2[8] = {0x21, ecu_Name[3], ecu_Name[4], ecu_Name[5],
+        unsigned char frame2[8] = {0x21,        ecu_Name[3], ecu_Name[4], ecu_Name[5],
                                    ecu_Name[6], ecu_Name[7], ecu_Name[8], ecu_Name[9]};
-        unsigned char frame3[8] = {0x22, ecu_Name[10], ecu_Name[11], ecu_Name[12],
+        unsigned char frame3[8] = {0x22,         ecu_Name[10], ecu_Name[11], ecu_Name[12],
                                    ecu_Name[13], ecu_Name[14], ecu_Name[15], ecu_Name[16]};
         unsigned char frame4[8] = {0x23, ecu_Name[17], ecu_Name[18]};
 
@@ -351,8 +327,9 @@ void obd2_handle_service_09(byte add_bytes, byte pid, byte *buf)
 // Request data stream service
 void obd2_handle_service_2C(byte add_bytes, byte pid, byte *buf)
 {
-    //const byte service_mode = 0x2C;
-    Serial.println("################ obd2_handle_service_2C " + String(add_bytes, 16) + "; " + String(pid, 16) + "; " + String(buf[0], 16) + "; ");
+    // const byte service_mode = 0x2C;
+    Serial.println("################ obd2_handle_service_2C " + String(add_bytes, 16) + "; " + String(pid, 16) + "; " +
+                   String(buf[0], 16) + "; ");
 
     if (pid == 0xFE)
     {
@@ -362,7 +339,8 @@ void obd2_handle_service_2C(byte add_bytes, byte pid, byte *buf)
 
 void obd2_handle_service_3E_AA_A9(byte service_mode, byte add_bytes, byte pid, byte *buf)
 {
-    Serial.println("################ obd2_handle_service_3E_AA " + String(service_mode, 16) + "; " + String(add_bytes, 16) + "; " + String(pid, 16) + "; " + String(buf[0], 16) + "; ");
+    Serial.println("################ obd2_handle_service_3E_AA " + String(service_mode, 16) + "; " +
+                   String(add_bytes, 16) + "; " + String(pid, 16) + "; " + String(buf[0], 16) + "; ");
 
     byte tmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     obd2_send_frame(REPLY_ID, 8, tmp);
