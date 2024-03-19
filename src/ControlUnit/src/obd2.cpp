@@ -41,6 +41,7 @@ service_01_pid obd2_service_01_PIDs[] = {
     {0x0D, obd2_service_empty}, // Vehicle speed
     {0x0E, obd2_service_empty}, // Timing advance
     {0x0F, obd2_service_empty}, // IAT
+    {0x11, obd2_service_empty}, // TPS
 
 };
 
